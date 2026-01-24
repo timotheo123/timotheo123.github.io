@@ -1,0 +1,997 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Platform Dev 1 Assessment</title>
+  <style>
+    :root{
+      --text-main: #e7efff;      /* primary text */
+      --text-soft: #a8b3cf;      /* secondary text */
+      --text-dim:  #7f8bb3;      /* hints */
+      --text-accent: #9bb7ff;    /* highlights */
+
+      --card-bg: rgba(18,26,43,.78);
+      --border: rgba(255,255,255,.10);
+      
+      --bg0:#060A14;
+      --bg1:#070D1A;
+      --bg2:#0A1224;
+      --glow1: rgba(80, 120, 255, 0.22);
+      --glow2: rgba(46, 204, 113, 0.14);
+      --glow3: rgba(255, 120, 200, 0.10);
+
+      --ok:  #22c55e;  /* green */
+      --bad: #ef4444;  /* red */
+    }
+    
+    *{
+      box-sizing: border-box;
+      color: inherit;
+    }
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color: var(--text-main);
+      padding:24px;
+
+      /* A cleaner, richer background */
+      background:
+        radial-gradient(1200px 700px at 18% -10%, var(--glow1), transparent 60%),
+        radial-gradient(900px 600px at 95% 10%,  var(--glow2), transparent 62%),
+        radial-gradient(900px 650px at 70% 120%, var(--glow3), transparent 55%),
+        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 55%, var(--bg0) 100%);
+      background-attachment: fixed;
+    }
+    .wrap{max-width:980px;margin:0 auto}
+    header{display:flex;gap:12px;align-items:baseline;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap}
+    h1{margin:0;font-size:20px;letter-spacing:.2px}
+    .sub{color:var(--muted);font-size:13px}
+    .card{
+      background:rgba(18,26,43,.78);border:1px solid var(--border);border-radius:14px;
+      padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.25);backdrop-filter:blur(8px);
+    }
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid var(--border);
+      border-radius:999px;color:var(--muted);font-size:12px;background:rgba(0,0,0,.15);
+    }
+
+    .grid{display:grid;gap:14px}
+    .two{grid-template-columns:1fr 1fr}
+    @media (max-width:900px){.two{grid-template-columns:1fr}}
+
+    .panel{
+      border:1px solid var(--border);border-radius:12px;padding:14px;background:rgba(0,0,0,.16)
+    }
+    .panel h2{margin:0 0 8px;font-size:16px}
+    .small{font-size:13px;color:var(--muted);line-height:1.45}
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}
+
+    select, input[type="number"]{
+      padding:10px 12px;border-radius:12px;border:1px solid var(--border);
+      background:rgba(255,255,255,.06);color:var(--text);outline:none;
+    }
+    select{min-width:220px}
+    input[type="number"]{width:160px}
+
+    button{
+      border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);border-radius:12px;
+      padding:10px 14px;cursor:pointer;font-weight:700;letter-spacing:.2px;
+      transition:transform 80ms ease,background 120ms ease,border-color 120ms ease,opacity 120ms ease;
+    }
+    button:hover{border-color:rgba(110,168,254,.40);background:rgba(110,168,254,.10)}
+    button:active{transform:translateY(1px)}
+    button[disabled]{opacity:.45;cursor:not-allowed}
+    .primary{border-color:rgba(110,168,254,.50);background:rgba(110,168,254,.14)}
+    .msg{margin-top:10px;font-size:13px;color:var(--muted);min-height:18px}
+    .msg.ok{color:var(--ok)} .msg.bad{color:var(--bad)}
+
+    /* Quiz */
+    .topbar{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap}
+    .progress{height:8px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;border:1px solid var(--border);min-width:220px}
+    .progress>div{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),rgba(110,168,254,.55));transition:width 220ms ease}
+    .question{font-size:16px;margin:8px 0 14px;line-height:1.4}
+    .choices{display:grid;gap:10px;margin:12px 0 6px}
+    label.choice{
+      display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start;padding:10px 12px;
+      border:1px solid var(--border);border-radius:12px;background:rgba(0,0,0,.12);cursor:pointer;
+    }
+    label.choice:hover{border-color:rgba(110,168,254,.40);background:rgba(110,168,254,.08)}
+    label.choice input{margin-top:2px}
+    .choiceKey{
+      display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;border-radius:7px;
+      border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--muted);font-size:12px;margin-right:8px;
+    }
+    .choiceText{color:var(--text);font-size:14px;line-height:1.45}
+
+    /* Make code blocks look nice if your JSON includes <pre><code> */
+    pre{
+      margin:10px 0 0;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:rgba(0,0,0,.35);
+      overflow:auto;
+    }
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:12.5px}
+
+    .controls{display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap}
+
+    /* Results */
+    .resultHeader{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .bigScore{font-size:22px;font-weight:800}
+    details{border:1px solid var(--border);border-radius:12px;padding:10px 12px;background:rgba(255,255,255,.04)}
+    summary{cursor:pointer;font-weight:650}
+    .tag{
+      display:inline-flex;padding:2px 8px;border-radius:999px;font-size:12px;border:1px solid var(--border);
+      margin-left:10px;color:var(--muted);
+    }
+    .tag.ok{color:var(--ok);border-color:rgba(46,204,113,.35)}
+    .tag.bad{color:var(--bad);border-color:rgba(255,107,107,.35)}
+    .review{margin-top:12px;display:grid;gap:10px}
+
+    /* Modal */
+    .modalOverlay{
+      position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;padding:18px;
+    }
+    .modal{
+      width:min(520px, 100%);background:rgba(18,26,43,.96);border:1px solid var(--border);
+      border-radius:14px;padding:16px;box-shadow:0 20px 50px rgba(0,0,0,.45);
+    }
+    .modal h3{margin:0 0 6px;font-size:16px}
+    .modal p{margin:0 0 12px;color:var(--muted);font-size:13px;line-height:1.4}
+    .modalActions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+
+      /* tiny noise texture using gradients (no image needed) */
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,0.02) 0px,
+          rgba(255,255,255,0.02) 1px,
+          transparent 2px,
+          transparent 4px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,255,255,0.015) 0px,
+          rgba(255,255,255,0.015) 1px,
+          transparent 2px,
+          transparent 5px
+        );
+      mix-blend-mode: overlay;
+      opacity: .35;
+    }
+    .wrap, .card { position: relative; z-index: 1; }
+    .card{
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow:
+        0 10px 30px rgba(0,0,0,.25),
+        0 0 0 1px rgba(110,168,254,.08),
+        0 0 80px rgba(110,168,254,.08);
+    }
+    h1, h2, h3, h4, h5, h6{
+      color: var(--text-main);
+    }
+
+    .sub,
+    .small,
+    .muted,
+    label{
+      color: var(--text-soft);
+    }
+
+    .msg{
+      color: var(--text-dim);
+    }
+
+    /* The closed select box */
+    select {
+      background: rgba(255,255,255,.06);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+
+    /* The opened dropdown options (works in most desktop browsers) */
+    select option {
+      background-color: #0b1220; /* dark */
+      color: #e7efff;            /* light text */
+    }
+
+    /* Optional: the currently selected option */
+    select option:checked {
+      background-color: #162447;
+      color: #ffffff;
+    }
+
+    /* Default text selection */
+    ::selection {
+      background: rgba(110, 168, 254, 0.35);
+      color: #ffffff;
+    }
+
+    ::-moz-selection {
+      background: rgba(110, 168, 254, 0.35);
+      color: #ffffff;
+    }
+
+    /* Code block selection (stronger contrast) */
+    pre ::selection,
+    code ::selection {
+      background: rgba(34, 197, 94, 0.45); /* green-ish */
+      color: #ffffff;
+    }
+
+    pre ::-moz-selection,
+    code ::-moz-selection {
+      background: rgba(34, 197, 94, 0.45);
+      color: #ffffff;
+    }
+
+    .card{
+      position: relative;
+      z-index: 1;
+    }
+
+    .modalOverlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      display: none;
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .modal{
+      position: relative;
+      z-index: 10000;
+    }
+
+    .btnDanger{
+      border-color: rgba(239,68,68,.45);
+      background: rgba(239,68,68,.10);
+    }
+    .btnDanger:hover{
+      border-color: rgba(239,68,68,.65);
+      background: rgba(239,68,68,.16);
+    }
+
+    /* Make the overall layout breathe on small screens */
+    @media (max-width: 600px){
+      body{ padding: 14px; }
+      .wrap{ padding: 0; }
+      header{ gap: 8px; }
+      .card{ padding: 14px; }
+    }
+
+    /* Ensure the 2-column grid collapses cleanly */
+    @media (max-width: 900px){
+      .grid.two{ grid-template-columns: 1fr !important; }
+    }
+
+    /* Fix flex rows that overflow */
+    .row{
+      flex-wrap: wrap;
+      align-items: stretch;
+    }
+
+    /* Make selects/inputs/buttons full width on narrow screens */
+    @media (max-width: 520px){
+      select,
+      input[type="number"],
+      button{
+        width: 100% !important;
+        min-width: 0 !important;
+      }
+
+      /* Any inline button groups stack */
+      .controls > div{
+        width: 100%;
+      }
+      .controls{
+        gap: 12px;
+      }
+    }
+
+    /* Remove fixed min-width that causes horizontal scroll */
+    select{
+      min-width: 0 !important;
+    }
+
+    /* Keep code blocks from forcing horizontal overflow */
+    pre{
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    /* Make setup radio/option rows align better on mobile */
+    .row label.small{
+      width: 100%;
+    }
+
+    /* If you used .panel or .controlGroup, keep them from overflowing */
+    .panel, .controlGroup{
+      min-width: 0;
+    }
+
+    /* Let the choice container shrink properly */
+    .choices,
+    label.choice{
+      min-width: 0;
+    }
+
+    /* Make the grid column flexible and prevent overflow */
+    label.choice{
+      grid-template-columns: 22px minmax(0, 1fr) !important;
+    }
+
+    /* Allow long text/code to wrap instead of pushing layout */
+    .choiceText,
+    .choiceText *{
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      min-width: 0;
+    }
+
+    /* Make code blocks inside choices fit on mobile */
+    .choiceText pre{
+      max-width: 100%;
+      overflow-x: auto;
+      white-space: pre;          /* keep code formatting */
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Tighten spacing + slightly smaller text on small screens */
+    @media (max-width: 520px){
+      label.choice{
+        padding: 10px 10px;
+        gap: 10px;
+      }
+      .choiceText{
+        font-size: 13px;
+        line-height: 1.45;
+      }
+      .choiceKey{
+        min-width: 20px;
+        height: 20px;
+        border-radius: 6px;
+        font-size: 11px;
+      }
+    }
+
+    /* Optional: make the clickable area nicer on touch devices */
+    @media (pointer: coarse){
+      label.choice{
+        padding: 12px;
+      }
+      label.choice input{
+        transform: scale(1.05);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Platform Developer I Assessment</h1>
+        <div class="sub">Reads JSON from same folder as <code>index.html</code> (Part 1–3) • randomized</div>
+      </div>
+      <div class="pill" id="statusPill">Not started</div>
+    </header>
+
+    <div class="card">
+      <!-- SETUP -->
+      <section id="setupView" class="grid">
+        <div class="panel">
+          <h2>Choose Part + Options</h2>
+          <div class="small">
+            Select which <b>Platform Dev 1 Part</b> to take. Then choose all questions or a custom count.
+            <br/>Note: If you open via <code>file://</code>, the browser may block JSON loading. Use a local server.
+          </div>
+
+          <div class="row">
+            <label class="small">Part</label>
+            <select id="partSelect">
+              <option value="1">PlatformDev1Part1</option>
+              <option value="2">PlatformDev1Part2</option>
+              <option value="3">PlatformDev1Part3</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label class="small">Question mode</label>
+            <label class="small" style="display:flex;gap:8px;align-items:center;">
+              <input type="radio" name="countMode" value="all" checked />
+              Answer all questions
+            </label>
+            <label class="small" style="display:flex;gap:8px;align-items:center;">
+              <input type="radio" name="countMode" value="custom" />
+              Choose number of questions
+            </label>
+            <input id="customCountInput" type="number" min="1" step="1" disabled />
+            <span class="small" id="availableCountText"></span>
+          </div>
+
+          <div class="row" style="justify-content:flex-end;">
+            <button class="primary" id="startBtn" type="button">Start</button>
+          </div>
+
+          <div class="msg" id="setupMsg"></div>
+        </div>
+
+        <div class="panel">
+          <h2>Expected JSON shape</h2>
+          <div class="small">
+            Each item should look like:
+            <pre><code>[
+  {
+    "question": "....",
+    "choices": { "a": "...", "b": "...", "c": "...", "d": "..." },
+    "answers": ["a"] // or ["a","c"]
+  }
+]</code></pre>
+            If your JSON uses <code>answer</code> instead of <code>answers</code>, this app supports both.
+          </div>
+        </div>
+      </section>
+
+      <!-- QUIZ -->
+      <section id="quizView" style="display:none;">
+        <div class="topbar">
+          <div class="pill" id="counterPill">Question 1 / 1</div>
+          <div class="progress" aria-label="progress">
+            <div id="progressBar"></div>
+          </div>
+          <div class="pill" id="modePill">Mode: All</div>
+        </div>
+
+        <div class="question" id="questionText"></div>
+        <div class="small" id="hintText"></div>
+
+        <form id="choicesForm" class="choices" autocomplete="off"></form>
+
+        <div class="controls">
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="button" id="prevBtn">← Prev</button>
+            <button type="button" id="nextBtn">Next →</button>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="button" id="exitBtn" class="btnDanger">Exit</button>
+            <button type="button" id="clearBtn">Clear</button>
+            <button type="button" class="primary" id="submitBtn">Submit</button>
+          </div>
+        </div>
+
+        <div class="msg" id="message"></div>
+      </section>
+
+      <!-- RESULTS -->
+      <section id="resultsView" style="display:none;" class="grid">
+        <div class="panel">
+          <div class="resultHeader">
+            <div>
+              <div class="bigScore" id="finalScoreText">Result: 0 / 0</div>
+              <div class="small" id="finalScoreSub"></div>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button type="button" id="retryBtn" class="primary">Restart / Retry</button>
+              <button type="button" id="backToSetupBtn">Change Part / Options</button>
+            </div>
+          </div>
+
+          <div class="grid two" style="margin-top:12px;">
+            <div class="panel" style="background:rgba(46,204,113,.06);">
+              <h2 style="margin:0 0 6px;font-size:16px;">Correctly Answered</h2>
+              <div class="small" id="correctCountText"></div>
+              <div id="correctList" class="review"></div>
+            </div>
+            <div class="panel" style="background:rgba(255,107,107,.06);">
+              <h2 style="margin:0 0 6px;font-size:16px;">Failed Questions</h2>
+              <div class="small" id="failedCountText"></div>
+              <div id="failedList" class="review"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- CONFIRM SUBMIT MODAL -->
+  <div class="modalOverlay" id="confirmOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+      <h3 id="confirmTitle">Submit quiz?</h3>
+      <p>Are you sure you want to submit? You can retry after seeing results.</p>
+      <div class="modalActions">
+        <button type="button" id="confirmCancelBtn">Cancel</button>
+        <button type="button" class="primary" id="confirmOkBtn">Okay, submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFIRM EXIT MODAL -->
+  <div class="modalOverlay" id="exitOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="exitTitle">
+      <h3 id="exitTitle">Exit quiz?</h3>
+      <p>Your progress for this attempt will be lost. Do you want to exit to setup?</p>
+      <div class="modalActions">
+        <button type="button" id="exitCancelBtn">Cancel</button>
+        <button type="button" class="primary" id="exitOkBtn">Yes, exit</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ---- JSON files next to index.html ----
+    const PART_FILES = {
+      "1": "./PlatformDev1Part1.json",
+      "2": "./PlatformDev1Part2.json",
+      "3": "./PlatformDev1Part3.json"
+    };
+
+    // ---------------------- Utilities ----------------------
+    function shuffleArray(arr) {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function normalizeKeys(keys) {
+      return [...keys].map(String).sort();
+    }
+
+    function isMultiAnswer(q) {
+      const ans = getAnswerKeys(q);
+      return Array.isArray(ans) && ans.length > 1;
+    }
+
+    function setMsg(id, text, kind = "") {
+      const el = document.getElementById(id);
+      el.textContent = text || "";
+      el.className = "msg" + (kind ? " " + kind : "");
+    }
+
+    function showView(viewName) {
+      document.getElementById("setupView").style.display = viewName === "setup" ? "" : "none";
+      document.getElementById("quizView").style.display = viewName === "quiz" ? "" : "none";
+      document.getElementById("resultsView").style.display = viewName === "results" ? "" : "none";
+    }
+
+    // Detect HTML presence (including <pre><code>) and render accordingly
+    function setMaybeHtml(el, value) {
+      const s = String(value ?? "");
+      // If it contains any HTML tag, render as HTML. Otherwise as text.
+      const hasHtml = /<\s*\/?\s*[a-zA-Z][^>]*>/.test(s);
+      if (hasHtml) el.innerHTML = s;
+      else el.textContent = s;
+    }
+
+    // Support both answers or answer keys, and ensure array
+    function getAnswerKeys(q) {
+      const raw = q?.answers ?? q?.answer ?? [];
+      if (Array.isArray(raw)) return raw.map(String);
+      if (typeof raw === "string") return [raw];
+      return [];
+    }
+
+    // Validate and normalize a loaded JSON question item to expected shape
+    function normalizeQuestionItem(item, idx) {
+      const question = item?.question ?? item?.q ?? "";
+      const choices = item?.choices ?? item?.options ?? {};
+      const answers = getAnswerKeys(item);
+
+      if (!question || typeof question !== "string") {
+        throw new Error(`Invalid question at index ${idx}: missing "question" string.`);
+      }
+      if (!choices || typeof choices !== "object") {
+        throw new Error(`Invalid question at index ${idx}: missing "choices" object.`);
+      }
+      const choiceKeys = Object.keys(choices);
+      if (choiceKeys.length === 0) {
+        throw new Error(`Invalid question at index ${idx}: choices is empty.`);
+      }
+      if (!Array.isArray(answers) || answers.length === 0) {
+        throw new Error(`Invalid question at index ${idx}: missing "answers" array (or "answer").`);
+      }
+
+      return { question, choices, answers };
+    }
+
+    async function loadPartQuestions(part) {
+      const path = PART_FILES[String(part)];
+      if (!path) throw new Error("Unknown part selected.");
+
+      const res = await fetch(path, { cache: "no-store" });
+      if (!res.ok) throw new Error(`Failed to load ${path} (HTTP ${res.status}).`);
+      const data = await res.json();
+      if (!Array.isArray(data)) throw new Error(`JSON file ${path} must be an array of questions.`);
+
+      return data.map(normalizeQuestionItem);
+    }
+
+    // ---------------------- App State ----------------------
+    let bankQuestions = []; // all loaded questions for selected part
+    let quizQuestions = []; // subset (randomized) for a run
+    let currentIndex = 0;
+    let selections = new Map(); // quiz index -> Set(keys)
+    let quizModeLabel = "All";
+    let currentPart = "1";
+
+    function getSelectedSet(idx) {
+      if (!selections.has(idx)) selections.set(idx, new Set());
+      return selections.get(idx);
+    }
+
+    function answeredCount() {
+      let count = 0;
+      for (let i = 0; i < quizQuestions.length; i++) {
+        if (getSelectedSet(i).size > 0) count++;
+      }
+      return count;
+    }
+
+    function updateSetupUI() {
+      const total = bankQuestions.length;
+      document.getElementById("availableCountText").textContent = total ? `Available: ${total}` : "";
+      const customInput = document.getElementById("customCountInput");
+
+      const mode = document.querySelector('input[name="countMode"]:checked')?.value || "all";
+      customInput.disabled = mode !== "custom";
+
+      if (total) {
+        customInput.max = String(total);
+        if (!customInput.value) customInput.value = String(Math.min(25, total));
+        if (+customInput.value > total) customInput.value = String(total);
+      } else {
+        customInput.value = "";
+      }
+    }
+
+    function updateQuizHeader() {
+      const total = quizQuestions.length;
+      document.getElementById("counterPill").textContent = `Question ${currentIndex + 1} / ${total}`;
+      const pct = total <= 1 ? 100 : Math.round(((currentIndex + 1) / total) * 100);
+      document.getElementById("progressBar").style.width = pct + "%";
+
+      document.getElementById("modePill").textContent = `Mode: ${quizModeLabel} • Part ${currentPart}`;
+      document.getElementById("statusPill").textContent = `Answered: ${answeredCount()} / ${total}`;
+    }
+
+    function renderQuestion() {
+      setMsg("message", "");
+
+      const q = quizQuestions[currentIndex];
+      if (!q) return;
+
+      const questionEl = document.getElementById("questionText");
+      setMaybeHtml(questionEl, q.question);
+
+      const hintEl = document.getElementById("hintText");
+      hintEl.textContent = isMultiAnswer(q)
+        ? "Multiple correct answers — check all that apply."
+        : "Single correct answer — choose one.";
+
+      const form = document.getElementById("choicesForm");
+      form.innerHTML = "";
+
+      const multi = isMultiAnswer(q);
+      const inputType = multi ? "checkbox" : "radio";
+      const groupName = "q_" + currentIndex;
+      const selected = getSelectedSet(currentIndex);
+
+      const choiceKeys = Object.keys(q.choices || {}).sort();
+
+      for (const key of choiceKeys) {
+        const id = `${groupName}_${key}`;
+
+        const label = document.createElement("label");
+        label.className = "choice";
+        label.setAttribute("for", id);
+
+        const input = document.createElement("input");
+        input.type = inputType;
+        input.name = groupName;
+        input.id = id;
+        input.value = key;
+        input.checked = selected.has(key);
+
+        input.addEventListener("change", () => {
+          const set = getSelectedSet(currentIndex);
+          if (inputType === "radio") {
+            set.clear();
+            if (input.checked) set.add(key);
+          } else {
+            if (input.checked) set.add(key);
+            else set.delete(key);
+          }
+          updateQuizHeader();
+        });
+
+        const wrap = document.createElement("div");
+        const k = document.createElement("span");
+        k.className = "choiceKey";
+        k.textContent = key.toUpperCase();
+
+        const v = document.createElement("span");
+        v.className = "choiceText";
+        // Render HTML if present in the choice string (e.g. <pre><code>...</code></pre>)
+        setMaybeHtml(v, q.choices[key]);
+
+        wrap.appendChild(k);
+        wrap.appendChild(v);
+
+        label.appendChild(input);
+        label.appendChild(wrap);
+        form.appendChild(label);
+      }
+
+      document.getElementById("prevBtn").disabled = currentIndex === 0;
+      document.getElementById("nextBtn").disabled = currentIndex === quizQuestions.length - 1;
+
+      updateQuizHeader();
+    }
+
+    function clearCurrentSelection() {
+      getSelectedSet(currentIndex).clear();
+      renderQuestion();
+      updateQuizHeader();
+    }
+
+    function computeResults() {
+      const total = quizQuestions.length;
+      let score = 0;
+      const correctItems = [];
+      const failedItems = [];
+
+      for (let i = 0; i < total; i++) {
+        const q = quizQuestions[i];
+        const selected = normalizeKeys(getSelectedSet(i));
+        const correct = normalizeKeys(getAnswerKeys(q));
+        const ok = selected.length === correct.length && selected.every((v, idx) => v === correct[idx]);
+
+        const item = { index: i, q, selected, correct, ok };
+        if (ok) { score++; correctItems.push(item); }
+        else { failedItems.push(item); }
+      }
+      return { score, total, correctItems, failedItems };
+    }
+
+    function buildReviewDetails(item) {
+      const details = document.createElement("details");
+      const summary = document.createElement("summary");
+
+      const titleSpan = document.createElement("span");
+      setMaybeHtml(titleSpan, item.q.question);
+
+      const tag = document.createElement("span");
+      tag.className = "tag " + (item.ok ? "ok" : "bad");
+      tag.textContent = item.ok ? "Correct" : "Incorrect";
+
+      summary.appendChild(titleSpan);
+      summary.appendChild(tag);
+
+      const body = document.createElement("div");
+      body.className = "small";
+      body.style.marginTop = "8px";
+
+      const your = item.selected.length ? item.selected.map(k => k.toUpperCase()).join(", ") : "—";
+      const cor = item.correct.map(k => k.toUpperCase()).join(", ");
+
+      const line1 = document.createElement("div");
+      line1.innerHTML = `<strong>Your answer:</strong> ${your}`;
+
+      const line2 = document.createElement("div");
+      line2.innerHTML = `<strong>Correct:</strong> ${cor}`;
+
+      body.appendChild(line1);
+      body.appendChild(line2);
+
+      details.appendChild(summary);
+      details.appendChild(body);
+
+      return details;
+    }
+
+    function showResultsScreen() {
+      const { score, total, correctItems, failedItems } = computeResults();
+      const pct = total ? Math.round((score / total) * 100) : 0;
+
+      document.getElementById("finalScoreText").textContent = `Result: ${score} / ${total}`;
+      document.getElementById("finalScoreSub").textContent = `Score: ${pct}% • Part ${currentPart} • Questions randomized`;
+
+      document.getElementById("correctCountText").textContent = `${correctItems.length} correct`;
+      document.getElementById("failedCountText").textContent = `${failedItems.length} failed`;
+
+      const correctList = document.getElementById("correctList");
+      const failedList = document.getElementById("failedList");
+      correctList.innerHTML = "";
+      failedList.innerHTML = "";
+
+      if (correctItems.length === 0) {
+        const d = document.createElement("div");
+        d.className = "small";
+        d.textContent = "No correct answers yet — try again!";
+        correctList.appendChild(d);
+      } else {
+        correctItems.forEach(item => correctList.appendChild(buildReviewDetails(item)));
+      }
+
+      if (failedItems.length === 0) {
+        const d = document.createElement("div");
+        d.className = "small";
+        d.textContent = "Perfect score — no failed questions 🎉";
+        failedList.appendChild(d);
+      } else {
+        failedItems.forEach(item => failedList.appendChild(buildReviewDetails(item)));
+      }
+
+      showView("results");
+      document.getElementById("statusPill").textContent = `Submitted • Part ${currentPart}`;
+    }
+
+    // ---------------------- Confirm Modal ----------------------
+    function openConfirm() {
+      const overlay = document.getElementById("confirmOverlay");
+      overlay.style.display = "flex";
+      overlay.setAttribute("aria-hidden", "false");
+    }
+    function closeConfirm() {
+      const overlay = document.getElementById("confirmOverlay");
+      overlay.style.display = "none";
+      overlay.setAttribute("aria-hidden", "true");
+    }
+
+    // ---------------------- Start / Retry ----------------------
+    async function prepareBankForSelectedPart() {
+      const part = document.getElementById("partSelect").value;
+      currentPart = part;
+
+      setMsg("setupMsg", "Loading questions...", "");
+      bankQuestions = [];
+      updateSetupUI();
+
+      try {
+        bankQuestions = await loadPartQuestions(part);
+        updateSetupUI();
+        setMsg("setupMsg", `Loaded Part ${part}: ${bankQuestions.length} questions.`, "ok");
+      } catch (err) {
+        setMsg("setupMsg", String(err?.message || err), "bad");
+      }
+    }
+
+    function startQuizFromSetup() {
+      const totalAvailable = bankQuestions.length;
+      if (!totalAvailable) {
+        setMsg("setupMsg", "No questions loaded. Make sure the JSON files exist next to index.html and you are running a local server.", "bad");
+        return;
+      }
+
+      const mode = document.querySelector('input[name="countMode"]:checked')?.value || "all";
+      let desired = totalAvailable;
+
+      if (mode === "custom") {
+        const raw = Number(document.getElementById("customCountInput").value);
+        if (!Number.isFinite(raw) || raw < 1) {
+          setMsg("setupMsg", "Please enter a valid number of questions (>= 1).", "bad");
+          return;
+        }
+        desired = Math.min(Math.floor(raw), totalAvailable);
+      }
+
+      quizQuestions = shuffleArray(bankQuestions).slice(0, desired);
+      quizModeLabel = (desired === totalAvailable) ? "All" : `${desired}`;
+
+      currentIndex = 0;
+      selections = new Map();
+
+      setMsg("setupMsg", "");
+      showView("quiz");
+      renderQuestion();
+    }
+
+    function goToSetup() {
+      showView("setup");
+      updateSetupUI();
+      setMsg("setupMsg", "");
+      document.getElementById("statusPill").textContent = "Not started";
+    }
+
+    // ---------------------- Events ----------------------
+    document.getElementById("startBtn").addEventListener("click", startQuizFromSetup);
+
+    document.getElementById("prevBtn").addEventListener("click", () => {
+      if (currentIndex > 0) { currentIndex--; renderQuestion(); }
+    });
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      if (currentIndex < quizQuestions.length - 1) { currentIndex++; renderQuestion(); }
+    });
+    document.getElementById("clearBtn").addEventListener("click", clearCurrentSelection);
+
+    document.getElementById("submitBtn").addEventListener("click", () => {
+      const total = quizQuestions.length;
+      const ans = answeredCount();
+      if (ans < total) setMsg("message", `You answered ${ans}/${total}. You can still submit now if you want.`, "");
+      openConfirm();
+    });
+
+    document.getElementById("confirmCancelBtn").addEventListener("click", closeConfirm);
+    document.getElementById("confirmOkBtn").addEventListener("click", () => {
+      closeConfirm();
+      showResultsScreen();
+    });
+
+    document.getElementById("confirmOverlay").addEventListener("click", (e) => {
+      if (e.target.id === "confirmOverlay") closeConfirm();
+    });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeConfirm();
+    });
+
+    document.getElementById("retryBtn").addEventListener("click", () => {
+      // retry uses current setup options (same part + mode), and re-randomizes
+      showView("setup");
+      startQuizFromSetup();
+    });
+    document.getElementById("backToSetupBtn").addEventListener("click", goToSetup);
+
+    document.querySelectorAll('input[name="countMode"]').forEach(r => {
+      r.addEventListener("change", updateSetupUI);
+    });
+
+    document.getElementById("partSelect").addEventListener("change", prepareBankForSelectedPart);
+
+    // ---------------------- Init ----------------------
+    (async function init() {
+      showView("setup");
+      await prepareBankForSelectedPart();
+    })();
+
+    function openExitConfirm() {
+      const overlay = document.getElementById("exitOverlay");
+      overlay.style.display = "flex";
+      overlay.setAttribute("aria-hidden", "false");
+    }
+    function closeExitConfirm() {
+      const overlay = document.getElementById("exitOverlay");
+      overlay.style.display = "none";
+      overlay.setAttribute("aria-hidden", "true");
+    }
+
+    document.getElementById("exitBtn").addEventListener("click", () => {
+      const hasProgress = answeredCount() > 0;
+      if (hasProgress) openExitConfirm();
+      else goToSetup(); // no answers yet, just exit
+    });
+
+    document.getElementById("exitCancelBtn").addEventListener("click", closeExitConfirm);
+
+    document.getElementById("exitOkBtn").addEventListener("click", () => {
+      closeExitConfirm();
+      goToSetup();
+    });
+
+    // close exit modal on click outside
+    document.getElementById("exitOverlay").addEventListener("click", (e) => {
+      if (e.target.id === "exitOverlay") closeExitConfirm();
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeConfirm();
+        closeExitConfirm();
+      }
+    });
+  </script>
+</body>
+</html>
