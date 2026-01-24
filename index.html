@@ -375,6 +375,295 @@
         transform: scale(1.05);
       }
     }
+
+    /* Ensure results grid never overflows */
+    #resultsView,
+    #resultsView .grid,
+    #resultsView .panel {
+      min-width: 0;
+    }
+
+    /* Force the correct/failed columns to stack on smaller screens */
+    @media (max-width: 900px){
+      #resultsView .grid.two{
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    /* Make the results header wrap cleanly */
+    .resultHeader{
+      align-items: flex-start;
+    }
+    .resultHeader > div{
+      min-width: 0;
+    }
+    @media (max-width: 520px){
+      .resultHeader{
+        gap: 12px;
+      }
+      .resultHeader > div:last-child{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: flex-start;
+      }
+      .resultHeader button{
+        width: 100% !important;
+      }
+    }
+
+    /* Prevent long question HTML from breaking layout */
+    .review,
+    .review details,
+    .review summary,
+    .review .small{
+      min-width: 0;
+    }
+
+    /* Allow long words/IDs and HTML text to wrap */
+    .review details,
+    .review summary,
+    .review details *{
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    /* Make code blocks inside results responsive */
+    #resultsView pre{
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Keep summary text readable and not cramped */
+    .review summary{
+      line-height: 1.35;
+    }
+
+    @media (max-width: 520px){
+      #resultsView .panel{
+        padding: 12px;
+      }
+      .review{ gap: 12px; }
+    }
+
+    .explainBox{
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+    
+    max-height: 160px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: pre-wrap;
+}
+    .explainTitle{
+      font-weight: 800;
+      font-size: 12.5px;
+      margin: 0 0 6px;
+      color: var(--text);
+    }
+    .explainText{
+      overflow-wrap:anywhere;
+      word-break:break-word;
+
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+    .explainText pre{max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+
+  
+  /* Results review list */
+  .reviewItem{
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(0,0,0,.12);
+    padding: 12px;
+  }
+  .reviewTop{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    justify-content:space-between;
+    flex-wrap:wrap;
+  }
+  .reviewTitle{
+    margin:0;
+    font-size:13.5px;
+    font-weight:800;
+    line-height:1.45;
+    min-width:0;
+  }
+  .reviewMeta{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:8px;
+  }
+  .metaLine{
+    font-size:12.5px;
+    color: var(--muted);
+    overflow-wrap:anywhere;
+    word-break:break-word;
+  }
+  .explainBox{
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.04);
+    max-height: 170px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .explainTitle{
+    font-weight: 800;
+    font-size: 12.5px;
+    margin: 0 0 6px;
+    color: var(--text);
+  }
+  .explainText{
+      overflow-wrap:anywhere;
+      word-break:break-word;
+
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--muted);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  /* Ensure code blocks inside explanation fit */
+  .explainBox pre{
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+
+  /* Review choices list */
+  .reviewChoices{
+    margin-top: 10px;
+    display: grid;
+    gap: 8px;
+  }
+  .reviewChoice{
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(0,0,0,.10);
+    padding: 10px 12px;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    min-width: 0;
+  }
+  .reviewChoice.badPick{
+    border-color: rgba(239,68,68,.35);
+    background: rgba(239,68,68,.08);
+  }
+  .reviewChoice.goodPick{
+    border-color: rgba(34,197,94,.35);
+    background: rgba(34,197,94,.08);
+  }
+  .reviewBadge{
+    font-size: 11.5px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    white-space: nowrap;
+    margin-left: auto;
+  }
+  .reviewBadge.ok{ color: var(--ok); border-color: rgba(34,197,94,.35); }
+  .reviewBadge.bad{ color: var(--bad); border-color: rgba(239,68,68,.35); }
+
+  .reviewCounter{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: rgba(255,255,255,.04);
+  }
+
+
+  .reviewChoiceKey{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width: 22px;
+    height: 22px;
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.06);
+    color: var(--muted);
+    font-size: 12px;
+    flex: 0 0 auto;
+    margin-top: 1px;
+  }
+
+  .reviewChoiceText{
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--text-soft);
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  .reviewChoiceText pre{
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+
+@media (max-width: 640px){
+  body{ padding: 14px; }
+  .wrap{ max-width: 100%; }
+  .card{ padding: 14px; }
+  .resultHeader{ flex-direction: column; align-items: stretch; gap: 12px; }
+  .bigScore{ font-size: 18px; }
+  .reviewTop{ flex-wrap: wrap; gap: 10px; }
+  .reviewChoice{ flex-wrap: wrap; }
+  .reviewBadge{ margin-left: 0; }
+}
+
+    /* --- Responsive (Results page + Review items) --- */
+    @media (max-width: 720px){
+      body{padding:14px;}
+      .wrap{max-width:100%;}
+      .topbar{gap:10px;}
+      .resultHeader{flex-direction:column; align-items:flex-start;}
+      .resultActions{width:100%;}
+      .resultActions button{flex:1 1 220px;}
+      .panel{padding:14px;}
+      .reviewItem{padding:14px;}
+      .reviewTop{flex-wrap:wrap; gap:10px;}
+      .reviewTitle{font-size:13px; line-height:1.4;}
+      .metaLine{font-size:12px;}
+      .explainBox{padding:10px 12px;}
+      .explainText{
+      overflow-wrap:anywhere;
+      word-break:break-word;
+max-height:180px;}
+      .reviewChoice{flex-direction:column; align-items:flex-start;}
+      .reviewBadge{margin-left:0; white-space:normal; align-self:flex-start;}
+    }
+    @media (max-width: 420px){
+      body{padding:10px;}
+      .resultActions button{flex:1 1 100%;}
+      .bigScore{font-size:20px;}
+    }
+
   </style>
 </head>
 
@@ -437,7 +726,8 @@
     "question": "....",
     "choices": { "a": "...", "b": "...", "c": "...", "d": "..." },
     "answers": ["a"] // or ["a","c"]
-  }
+  ,
+    "explanation": "Short why this is correct"}
 ]</code></pre>
             If your JSON uses <code>answer</code> instead of <code>answers</code>, this app supports both.
           </div>
@@ -460,11 +750,11 @@
         <form id="choicesForm" class="choices" autocomplete="off"></form>
 
         <div class="controls">
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <div class="resultActions" style="display:flex; gap:10px; flex-wrap:wrap;">
             <button type="button" id="prevBtn">← Prev</button>
             <button type="button" id="nextBtn">Next →</button>
           </div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <div class="resultActions" style="display:flex; gap:10px; flex-wrap:wrap;">
             <button type="button" id="exitBtn" class="btnDanger">Exit</button>
             <button type="button" id="clearBtn">Clear</button>
             <button type="button" class="primary" id="submitBtn">Submit</button>
@@ -475,33 +765,30 @@
       </section>
 
       <!-- RESULTS -->
-      <section id="resultsView" style="display:none;" class="grid">
-        <div class="panel">
-          <div class="resultHeader">
-            <div>
-              <div class="bigScore" id="finalScoreText">Result: 0 / 0</div>
-              <div class="small" id="finalScoreSub"></div>
-            </div>
-            <div style="display:flex; gap:10px; flex-wrap:wrap;">
-              <button type="button" id="retryBtn" class="primary">Restart / Retry</button>
-              <button type="button" id="backToSetupBtn">Change Part / Options</button>
-            </div>
-          </div>
+      
+<section id="resultsView" style="display:none;" class="grid">
+  <div class="panel">
+    <div class="resultHeader">
+      <div style="min-width:0;">
+        <div class="bigScore" id="finalScoreText">Result: 0 / 0</div>
+        <div class="small" id="finalScoreSub"></div>
+      </div>
+      <div class="resultActions" style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button type="button" id="retryBtn" class="primary">Restart / Retry</button>
+        <button type="button" id="backToSetupBtn">Change Part / Options</button>
+      </div>
+    </div>
 
-          <div class="grid two" style="margin-top:12px;">
-            <div class="panel" style="background:rgba(46,204,113,.06);">
-              <h2 style="margin:0 0 6px;font-size:16px;">Correctly Answered</h2>
-              <div class="small" id="correctCountText"></div>
-              <div id="correctList" class="review"></div>
-            </div>
-            <div class="panel" style="background:rgba(255,107,107,.06);">
-              <h2 style="margin:0 0 6px;font-size:16px;">Failed Questions</h2>
-              <div class="small" id="failedCountText"></div>
-              <div id="failedList" class="review"></div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <div class="panel" style="margin-top:12px; background:rgba(255,255,255,.03);">
+      <h2 style="margin:0 0 6px;font-size:16px;">Review</h2>
+      <div class="small" id="reviewCountText"></div>
+      <div id="allReviewList" class="review"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONFIRM SUBMIT MODAL -->
+
     </div>
   </div>
 
@@ -577,7 +864,18 @@
       else el.textContent = s;
     }
 
-    // Support both answers or answer keys, and ensure array
+    // Decode HTML entities (e.g., &lt; &gt; &amp;) without stripping tags.
+    function decodeHtmlEntities(str) {
+      const ta = document.createElement("textarea");
+      ta.innerHTML = String(str ?? "");
+      return ta.value;
+    }
+
+
+    // Clean explanation text so it doesn't render raw <pre><code> blocks inside results.
+    // - Removes <pre> / <code> tags
+    // - Decodes HTML entities (e.g., &lt;Account&gt; -> <Account>)
+    
     function getAnswerKeys(q) {
       const raw = q?.answers ?? q?.answer ?? [];
       if (Array.isArray(raw)) return raw.map(String);
@@ -605,7 +903,7 @@
         throw new Error(`Invalid question at index ${idx}: missing "answers" array (or "answer").`);
       }
 
-      return { question, choices, answers };
+      return { question, choices, answers, explanation: (item?.explanation ?? "") };
     }
 
     async function loadPartQuestions(part) {
@@ -767,77 +1065,203 @@
       return { score, total, correctItems, failedItems };
     }
 
-    function buildReviewDetails(item) {
-      const details = document.createElement("details");
-      const summary = document.createElement("summary");
+    
+  function buildReviewDetails(item, totalCount) {
+    const wrap = document.createElement("div");
+    wrap.className = "reviewItem";
 
-      const titleSpan = document.createElement("span");
-      setMaybeHtml(titleSpan, item.q.question);
+    const top = document.createElement("div");
+    top.className = "reviewTop";
 
-      const tag = document.createElement("span");
-      tag.className = "tag " + (item.ok ? "ok" : "bad");
-      tag.textContent = item.ok ? "Correct" : "Incorrect";
+    const title = document.createElement("div");
+    title.className = "reviewTitle";
+    setMaybeHtml(title, item.q.question);
 
-      summary.appendChild(titleSpan);
-      summary.appendChild(tag);
+    const right = document.createElement("div");
+    right.style.display = "flex";
+    right.style.gap = "8px";
+    right.style.flexWrap = "wrap";
+    right.style.justifyContent = "flex-end";
+    right.style.alignItems = "center";
 
-      const body = document.createElement("div");
-      body.className = "small";
-      body.style.marginTop = "8px";
+    const qNo = (typeof item.index === "number" ? (item.index + 1) : 0);
+    const counter = document.createElement("span");
+    counter.className = "reviewCounter";
+    counter.textContent = totalCount ? `${qNo} of ${totalCount}` : `${qNo}`;
 
-      const your = item.selected.length ? item.selected.map(k => k.toUpperCase()).join(", ") : "—";
-      const cor = item.correct.map(k => k.toUpperCase()).join(", ");
+    const tag = document.createElement("span");
+    tag.className = "tag " + (item.ok ? "ok" : "bad");
+    tag.textContent = item.ok ? "Correct" : "Incorrect";
 
-      const line1 = document.createElement("div");
-      line1.innerHTML = `<strong>Your answer:</strong> ${your}`;
+    right.appendChild(counter);
+    right.appendChild(tag);
 
-      const line2 = document.createElement("div");
-      line2.innerHTML = `<strong>Correct:</strong> ${cor}`;
+    top.appendChild(title);
+    top.appendChild(right);
 
-      body.appendChild(line1);
-      body.appendChild(line2);
+    const meta = document.createElement("div");
+    meta.className = "reviewMeta";
 
-      details.appendChild(summary);
-      details.appendChild(body);
+    const your = item.selected.length ? item.selected.map(k => k.toUpperCase()).join(", ") : "—";
+    const cor  = item.correct.map(k => k.toUpperCase()).join(", ");
 
-      return details;
+    const line1 = document.createElement("div");
+    line1.className = "metaLine";
+    line1.innerHTML = `<strong>Your answer:</strong> ${your}`;
+
+    const line2 = document.createElement("div");
+    line2.className = "metaLine";
+    line2.innerHTML = `<strong>Correct answer(s):</strong> ${cor}`;
+
+    meta.appendChild(line1);
+    meta.appendChild(line2);
+
+    wrap.appendChild(top);
+    wrap.appendChild(meta);
+
+    // Show choices, mark selected/correct
+    const selectedSet = new Set(item.selected.map(String));
+    const correctSet  = new Set(item.correct.map(String));
+
+    const choiceKeys = Object.keys(item.q.choices || {}).sort();
+    const choicesBox = document.createElement("div");
+    choicesBox.className = "reviewChoices";
+
+    for (const key of choiceKeys) {
+      const isSelected = selectedSet.has(key);
+      const isCorrect  = correctSet.has(key);
+
+      const row = document.createElement("div");
+      row.className = "reviewChoice";
+
+      if (isSelected && isCorrect) row.classList.add("goodPick");
+      if (isSelected && !isCorrect) row.classList.add("badPick");
+
+      const k = document.createElement("span");
+      k.className = "reviewChoiceKey";
+      k.textContent = key.toUpperCase();
+
+      const text = document.createElement("div");
+      text.className = "reviewChoiceText";
+      setMaybeHtml(text, item.q.choices[key]);
+
+      const badge = document.createElement("span");
+      badge.className = "reviewBadge";
+
+      if (isSelected && isCorrect) {
+        badge.classList.add("ok");
+        badge.textContent = "Selected • Correct";
+      } else if (isSelected && !isCorrect) {
+        badge.classList.add("bad");
+        badge.textContent = "Selected • Wrong";
+      } else if (!isSelected && isCorrect) {
+        badge.classList.add("ok");
+        badge.textContent = "Correct";
+      } else {
+        badge.textContent = "Not selected";
+      }
+
+      row.appendChild(k);
+      row.appendChild(text);
+      row.appendChild(badge);
+      choicesBox.appendChild(row);
     }
+
+    wrap.appendChild(choicesBox);
+
+    // Explanation (unescaped + allows <pre><code>)
+    const explRaw = (item.q.explanation ?? "");
+    if (String(explRaw).trim()) {
+      const explainBox = document.createElement("div");
+      explainBox.className = "explainBox";
+
+      const t = document.createElement("div");
+      t.className = "explainTitle";
+      t.textContent = "Explanation";
+
+      const p = document.createElement("div");
+      p.className = "explainText";
+      setMaybeHtml(p, decodeHtmlEntities(explRaw));
+
+      explainBox.appendChild(t);
+      explainBox.appendChild(p);
+      wrap.appendChild(explainBox);
+    }
+
+    return wrap;
+  }
+
+
 
     function showResultsScreen() {
       const { score, total, correctItems, failedItems } = computeResults();
       const pct = total ? Math.round((score / total) * 100) : 0;
 
-      document.getElementById("finalScoreText").textContent = `Result: ${score} / ${total}`;
-      document.getElementById("finalScoreSub").textContent = `Score: ${pct}% • Part ${currentPart} • Questions randomized`;
+      const finalScoreText = document.getElementById("finalScoreText");
+      if (finalScoreText) finalScoreText.textContent = `Result: ${score} / ${total}`;
 
-      document.getElementById("correctCountText").textContent = `${correctItems.length} correct`;
-      document.getElementById("failedCountText").textContent = `${failedItems.length} failed`;
+      const finalScoreSub = document.getElementById("finalScoreSub");
+      if (finalScoreSub) finalScoreSub.textContent = `Score: ${pct}% • Part ${currentPart} • Questions randomized`;
+
+      const cEl = document.getElementById("correctCountText");
+      if (cEl) cEl.textContent = `${correctItems.length} correct`;
+
+      const fCountEl = document.getElementById("failedCountText");
+      if (fCountEl) fCountEl.textContent = `${failedItems.length} failed`;
 
       const correctList = document.getElementById("correctList");
       const failedList = document.getElementById("failedList");
-      correctList.innerHTML = "";
-      failedList.innerHTML = "";
 
-      if (correctItems.length === 0) {
-        const d = document.createElement("div");
-        d.className = "small";
-        d.textContent = "No correct answers yet — try again!";
-        correctList.appendChild(d);
-      } else {
-        correctItems.forEach(item => correctList.appendChild(buildReviewDetails(item)));
+      if (correctList) {
+        correctList.innerHTML = "";
+        if (correctItems.length === 0) {
+          const d = document.createElement("div");
+          d.className = "small";
+          d.textContent = "No correct answers yet — try again!";
+          correctList.appendChild(d);
+        } else {
+          correctItems.forEach(item => correctList.appendChild(buildReviewDetails(item, total)));
+        }
       }
 
-      if (failedItems.length === 0) {
-        const d = document.createElement("div");
-        d.className = "small";
-        d.textContent = "Perfect score — no failed questions 🎉";
-        failedList.appendChild(d);
-      } else {
-        failedItems.forEach(item => failedList.appendChild(buildReviewDetails(item)));
+      if (failedList) {
+        failedList.innerHTML = "";
+        if (failedItems.length === 0) {
+          const d = document.createElement("div");
+          d.className = "small";
+          d.textContent = "Perfect score — no failed questions 🎉";
+          failedList.appendChild(d);
+        } else {
+          failedItems.forEach(item => failedList.appendChild(buildReviewDetails(item, total)));
+        }
+      }
+
+      const allList = document.getElementById("allReviewList");
+      if (allList) allList.innerHTML = "";
+
+      const reviewCount = document.getElementById("reviewCountText");
+      if (reviewCount) {
+        reviewCount.textContent = `You answered ${answeredCount()}/${total} question(s). Review all ${total} question(s) below.`;
+      }
+
+      // Show all questions in the order taken
+      const allItems = [...correctItems, ...failedItems].sort((a,b) => a.index - b.index);
+      if (allList) {
+        for (const item of allItems) {
+          allList.appendChild(buildReviewDetails(item, total));
+        }
+      }
+
+      // Highlight any code blocks (if Prism is included)
+      if (window.Prism) {
+        const rv = document.getElementById("resultsView");
+        if (rv) Prism.highlightAllUnder(rv);
       }
 
       showView("results");
-      document.getElementById("statusPill").textContent = `Submitted • Part ${currentPart}`;
+
+      const statusPill = document.getElementById("statusPill");
+      if (statusPill) statusPill.textContent = `Submitted • Part ${currentPart}`;
     }
 
     // ---------------------- Confirm Modal ----------------------
