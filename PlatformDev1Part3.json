@@ -203,7 +203,7 @@
     "answers": [
       "b"
     ],
-    "explanation": "Correct answer(s): B. (B = <pre><code>public class DrawList implements Sortable, Drawable {\n    public void sort() {\n        /*implementation*/\n    }\n    public voi...) Covered under Platform Developer I core concepts."
+    "explanation": "Correct answer(s): B. (Answer B is correct because it follows the standard Apex syntax for implementing multiple interfaces) Covered under Platform Developer I core concepts."
   },
   {
     "question": "A developer is creating a Lightning web component to show a list of sales records. The Sales Representative user should be able to see the commission field on each record. The Sales Assistant user should be able to see all fields on the record except the commission field. How should this be enforced so that the component works for both users without showing any errors?",
@@ -219,7 +219,7 @@
     "explanation": "Correct answer(s): B. (B = Use Security.stripInaccessible Le to remove fields inaccessible to the current user.) Covered under LWC/Aura UI (PD1)."
   },
   {
-    "question": "<p>The following code snippet is executed by a lightning web component in an environment with more than 2,000 lead records:</p>\r\n<pre><code>@AuraEnabled\npublic static void updateLeads(){\n    for(Lead thisLead : [SELECT Origin__c FROM Lead]){\n        thisLead.LeadSource = thisLead.Origin__c;\n        update thisLead;\n    }\n}</code></pre>\r\n<p>Which governor limit will likely be exceeded within the Apex transaction?</p>",
+    "question": "<p>The following code snippet is executed by a lightning web component in an environment with more than 2,000 lead records:</p>\n\n<pre><code>@AuraEnabled\npublic static void updateLeads(){\n    for(Lead thisLead : [SELECT Origin__c FROM Lead]){\n        thisLead.LeadSource = thisLead.Origin__c;\n        update thisLead;\n    }\n}</code></pre>\n\n<p>Which governor limit will likely be exceeded within the Apex transaction?</p>",
     "choices": {
       "a": "Total number of records processed as a result of DML statements",
       "b": "Total number of SOQL queries issued",
@@ -256,7 +256,7 @@
       "a",
       "c"
     ],
-    "explanation": "Correct answer(s): A, C. (A = Create a custom Visualforce quick action that performs the HTTP REST callout, and use a Visualforce quick action to expose the component ...; C = Create a Lightning component quick action that performs the HTTP REST callout, and use a Lightning Action to expose the component on the ...) Covered under LWC/Aura UI (PD1)."
+    "explanation": "Correct answer(s): A, C. (Answers A and C are correct because they utilize Quick Actions, which are the standard mechanism for executing custom logic (like an HTTP REST callout) directly in response to a user pressing a button in Lightning Experience.) Covered under LWC/Aura UI (PD1)."
   },
   {
     "question": "A developer has an integer variable called maxAttempts. The developer needs to ensure that once maxAttempts is initialized, it preserves its value for the length of the Apex transaction; while being able to share the variable's state between trigger executions. How should the developer declare maxAttempts to meet these requirements?",
@@ -282,7 +282,7 @@
     "answers": [
       "d"
     ],
-    "explanation": "Correct answer(s): D. (D = <pre><code>public static void setBusinessUnitToEMEA(List&lt;Contact&gt; contacts) {\n    for (Contact thisContact : contacts) {\n        th...) Covered under Apex triggers & bulk patterns (PD1)."
+    "explanation": "Correct answer(s): D. (Answer D is correct because it adheres to the core Apex best practice of bulkification.) Covered under Apex triggers & bulk patterns (PD1)."
   },
   {
     "question": "A developer deployed a trigger to update the status__c of Assets related to an Account when the Account’s status changes and a nightly integration that updates Accounts in bulk has started to fail with limit failures. What should the developer change about the code to address the failure while still having the code update all of the Assets correctly?",
@@ -392,7 +392,7 @@
     "explanation": "Correct answer(s): A, B. (A = The parent component can invoke a public method in the child component.; B = The parent component can use a public property to pass the data to the child component,) Covered under LWC/Aura UI (PD1)."
   },
   {
-    "question": "<p>Consider the following Apex code snippet:</p>\r\n<pre><code>Boolean isOK;\nInteger x;\nString theString = 'Hello';\n\nif(isOK == false &amp;&amp; theString == 'Hello'){\n    x = 1;\n}\nelse if(isOK == true &amp;&amp; theString == 'Hello'){\n    x = 2;\n}\nelse if(isOK != null &amp;&amp; theString == 'Hello'){\n    x = 3;\n}\nelse{\n    x = 4;\n}</code></pre>\r\n<p>Based on this code, what is the value of <strong>x</strong>?</p>\r\n<p><strong>Answer:</strong> 3</p>\r\n<p><em>Explanation:</em> <code>isOK</code> is declared but not initialized, so its default value is <code>null</code>. The first two <code>if</code> conditions fail because <code>null == false</code> and <code>null == true</code> are both false. The third condition checks <code>isOK != null</code>, which is also false because <code>isOK</code> is <code>null</code>, so the <code>else</code> block is executed and <code>x = 4</code>. Correction: Actually, the else block executes, so the value of x is 4.</p>",
+    "question": "<p>Consider the following Apex code snippet:</p>\n\n<pre><code>Boolean isOK;\nInteger x;\nString theString = 'Hello';\n\nif(isOK == false &amp;&amp; theString == 'Hello'){\n    x = 1;\n}\nelse if(isOK == true &amp;&amp; theString == 'Hello'){\n    x = 2;\n}\nelse if(isOK != null &amp;&amp; theString == 'Hello'){\n    x = 3;\n}\nelse{\n    x = 4;\n}</code></pre>\n\n<p>Based on this code, what is the value of <strong>x</strong>?</p>\n\n<p><strong>Answer:</strong> 3</p>\n\n<p><em>Explanation:</em> <code>isOK</code> is declared but not initialized, so its default value is <code>null</code>. The first two <code>if</code> conditions fail because <code>null == false</code> and <code>null == true</code> are both false. The third condition checks <code>isOK != null</code>, which is also false because <code>isOK</code> is <code>null</code>, so the <code>else</code> block is executed and <code>x = 4</code>. Correction: Actually, the else block executes, so the value of x is 4.</p>",
     "choices": {
       "a": "4",
       "b": "1",
@@ -477,26 +477,26 @@
     "choices": {
       "a": "Add custom controller attributes to display the message.",
       "b": "Use a try/catch with a custom exception class.",
-      "c": "Include <apex:messages> on the Visualforce page.",
+      "c": "Include <code>&lt;apex:messages&gt;</code> on the Visualforce page.",
       "d": "Perform the DML using the database.unsert() method"
     },
     "answers": [
       "c"
     ],
-    "explanation": "Correct answer(s): C. (C = Include <apex:messages> on the Visualforce page.) Covered under Visualforce & rendering (PD1)."
+    "explanation": "Correct answer(s): C. (C = Include <code>&lt;apex:messages&gt;</code> on the Visualforce page.) Covered under Visualforce & rendering (PD1)."
   },
   {
     "question": "Which code displays the contents of a Visualforce page as a PDF?",
     "choices": {
-      "a": "<apex:page contentTyp«-\"applic*ticn/pdf''>",
-      "b": "<apex:page contentType»\"pdf\">",
-      "c": "<apex:page renderAs-wpdf\">",
-      "d": "<apex:page renderAs=''application/pdf''>"
+      "a": "<code>&lt;apex:page contentType=\"application/pdf\"&gt;</code>",
+      "b": "<code>&lt;apex:page contentType=\"pdf\"&gt;</code>",
+      "c": "<code>&lt;apex:page renderAs=\"pdf\"&gt;</code>",
+      "d": "<code>&lt;apex:page renderAs=\"application/pdf\"&gt;</code>"
     },
     "answers": [
       "c"
     ],
-    "explanation": "Correct answer(s): C. (C = <apex:page renderAs-wpdf\">) Covered under Visualforce & rendering (PD1)."
+    "explanation": "Correct answer(s): C. (C = <code>&lt;apex:page renderAs=\"pdf\"&gt;</code>) Covered under Visualforce & rendering (PD1)."
   },
   {
     "question": "Universal Containers wants Opportunities to no longer be editable when it reaches the Closed/Won stage. Which two strategies can a developer use to accomplish this? Choose 2 answers",
@@ -528,15 +528,15 @@
   {
     "question": "Which code in a Visualforce page and/or controller might present a security vulnerability?",
     "choices": {
-      "a": "<apex:outputText escape=\"false\" value=\" {!$CurrentPage.parameters.userInput}\" />",
-      "b": "<apex:outputField value=\"{!ctrl.userInput}\" />",
-      "c": "<apex:outputText value=\"{!$CurrentPage.parameters.userInput}\" />",
-      "d": "<apex:outputField escape=\"false\" value=\"{!ctrl.userInput}\" />"
+      "a": "<code>&lt;apex:outputText escape=\"false\" value=\"{!$CurrentPage.parameters.userInput}\" /&gt;</code>",
+      "b": "<code>&lt;apex:outputField value=\"{!ctrl.userInput}\" /&gt;</code>",
+      "c": "<code>&lt;apex:outputText value=\"{!$CurrentPage.parameters.userInput}\" /&gt;</code>",
+      "d": "<code>&lt;apex:outputField escape=\"false\" value=\"{!ctrl.userInput}\" /&gt;</code>"
     },
     "answers": [
       "a"
     ],
-    "explanation": "Correct answer(s): A. (A = <apex:outputText escape=\"false\" value=\" {!$CurrentPage.parameters.userInput}\" />) Covered under Visualforce & rendering (PD1)."
+    "explanation": "Correct answer(s): A. (A = <code>&lt;apex:outputText escape=\"false\" value=\"{!$CurrentPage.parameters.userInput}\" /&gt;</code>) Covered under Visualforce & rendering (PD1)."
   },
   {
     "question": "What should a developer use to script the deployment and unit test execution as part of continuous integration?",
@@ -552,7 +552,7 @@
     "explanation": "Correct answer(s): C. (C = Salesforce CLI) Covered under Apex testing (PD1)."
   },
   {
-    "question": "The Job _Application__c custom object has a field that is a master-detail relationship to the Contact object, where the Contact object is the master. As part of a feature implementation, a developer needs to retrieve a list containing all Contact records where the related Account Industry is ‘Technology’, while also retrieving the Contact's Job_Application__c records. Based on the object's relationships, what is the most efficient statement to retrieve the list of Contacts?",
+    "question": "The Job _Application__c custom object has a field that is a master-detail relationship to the Contact object, where the Contact object is the master. As part of a feature implementation, a developer needs to retrieve a list containing all Contact records where the related Account Industry is 'Technology’, while also retriev'ng the Contact's Job_Application__c records. Based on the object's relationships, what is the most efficient statement to retrieve the list of Contacts?",
     "choices": {
       "a": "[SELECT Id, (SELECT Id FROM Job_Applications__r) FROM Contact WHERE Accounts.Industry = 'Technology']",
       "b": "[SELECT Id, (SELECT Id FROM Job_Application__c) FROM Contact WHERE Accounts.Industry = 'Technology']",
@@ -618,7 +618,7 @@
     "explanation": "Correct answer(s): A. (A = Declare the class and method using the global access modifier.) Covered under deployment & dev lifecycle (PD1)."
   },
   {
-    "question": "A developer created a trigger on the Account object. While testing the trigger, the developer sees the error message ‘Maximum trigger depth exceeded’. What could be the possible causes?",
+    "question": "A developer created a trigger on the Account object. While testing the trigger, the developer sees the error message \"Maximum trigger depth exceeded\". What could be the possible causes?",
     "choices": {
       "a": "The developer does not have the correct user permission.",
       "b": "The trigger is too long and should be refactored into a helper class.",
@@ -801,7 +801,7 @@
     "answers": [
       "c"
     ],
-    "explanation": "Correct answer(s): C. (C = <pre><code>@InvocableMethod(label = 'Additional Info')\npublic static List<ContactInfo> getInfo(List<Id> contactIds) {\n    /* Implementati...) Covered under Flow & automation (PD1)."
+    "explanation": "Correct answer(s): C. (Answer C is correct because it follows the strict signature requirements for the @InvocableMethod annotation in Apex.) Covered under Flow & automation (PD1)."
   },
   {
     "question": "Consider the following code snippet for a Visualforce page that is launched using a Custom Button on the Account detail page layout. When the Save button is pressed the developer must perform a complex validation that involves multiple objects and, upon success, redirect the user to another Visualforce page. What can the developer use to meet this business requirement?",
@@ -971,7 +971,7 @@
     "answers": [
       "d"
     ],
-    "explanation": "Correct answer(s): D. (D = <pre><code>webservice class WebServiceClass {\n    private Boolean helperMethod() {\n        /* implementation ... */\n    }\n\n    webservice...) Covered under Platform Developer I core concepts."
+    "explanation": "Correct answer(s): D. (Answer C is correct because it adheres to the syntax requirements for defining Apex SOAP Web Services.) Covered under Platform Developer I core concepts."
   },
   {
     "question": "The value of the account type field is not being displayed correctly on the page. Assuming the custom controller is properly referenced on the Visualforce page, what should the developer do to correct the problem?",
@@ -1011,17 +1011,17 @@
     "explanation": "Correct answer(s): C. (C = Lightning component Lightning flow) Covered under LWC/Aura UI (PD1)."
   },
   {
-    "question": "A developer created this trigger that calls MyClass.myStaticMethod: The developer creates a test class with a test method that calls MyClass.myStaticMethod directly, resulting in 81% overall code coverage What happens when the developer tries to deploy the trigger and two classes to production, assuming no other code exists?",
+    "question": "<p>A developer created this Apex trigger that calls <code>MyClass.myStaticMethod</code>:</p>\n\n<pre><code>trigger myTrigger on Contact (before insert) {\n    MyClass.myStaticMethod(trigger.new);\n}</code></pre>\n\n<p>The developer creates a test class with a test method that calls <code>MyClass.myStaticMethod</code>, resulting in 81% overall code coverage.</p>\n\n<p>What happens when the developer tries to deploy the trigger and two classes to production, assuming no other code exists?</p>\n\n<p><strong>Answer:</strong> The deployment fails because the trigger itself has no direct test coverage. Even though <code>MyClass.myStaticMethod</code> is covered, triggers must also be executed by a test method to count toward deployment coverage requirements.</p>",
     "choices": {
-      "a": "The deployment passes because both classes and the trigger were included in the deployment.",
-      "b": "The deployment fails because no assertions were made in the test method.",
-      "c": "The deployment passes because the Apex code has the required > 75% code coverage.",
+      "a": "The deployment fails because no assertions were made in the test method.",
+      "b": "The deployment passes because both classes and the trigger were included in the deployment.",
+      "c": "The deployment passes because the Apex code has the required >75% code coverage.",
       "d": "The deployment fails because the Apex trigger has no code coverage."
     },
     "answers": [
       "d"
     ],
-    "explanation": "Correct answer(s): D. (D = The deployment fails because the Apex trigger has no code coverage.) Covered under Apex testing (PD1)."
+    "explanation": "Correct answer(s): D. (D = The deployment fails because Apex trigger has no code coverage.) Covered under Apex testing (PD1)."
   },
   {
     "question": "A developer needs to create a baseline set of data (Accounts, Contacts, Products, Assets) for an entire suite of Apex tests allowing them to test isolated requirements for various types of Salesforce cases. Which approach can efficiently generate the required data for each unit test?",
@@ -1117,16 +1117,16 @@
   {
     "question": "Assuming that name is a String obtained by an a Visualforce page, which two SOQL Queries performed are safe from SOQL injection? Choose 2 answers",
     "choices": {
-      "a": "<pre><code>String query = '%' + name + '%';\nList&lt;Account&gt; results = [SELECT Id FROM Account WHERE Name LIKE :query];</code></pre>",
-      "b": "<pre><code>String query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + name.replace('\\\\'','\\\\'\\\\'') + '%\\'';\\nList&lt;Account&gt; results = Database.query(query);</code></pre>",
-      "c": "<pre><code>String query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + String.escapeSingleQuotes(name) + '%\\'';\nList&lt;Account&gt; results = Database.query(query);</code></pre>",
-      "d": "<pre><code>String query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + String.escapeSingleQuotes(name) + '%\\'';\\nList&lt;Account&gt; results = Database.query(query);</code></pre>"
+      "a": "<pre><code>String query = 'SELECT Id FROM Account WHERE Name LIKE \\''%' + name.noQuotes() + '%\\'';\nList<Account> results = Database.query(query);</code></pre>",
+      "b": "<pre><code>String query = 'SELECT Id FROM Account WHERE Name LIKE \\''%' + String.escapeSingleQuotes(name) + '%\\'';\nList<Account> results = Database.query(query);</code></pre>",
+      "c": "<pre><code>String query = 'SELECT Id FROM Account WHERE Name LIKE \\''%' + name + '%\\'';\nList<Account> results = Database.query(query);</code></pre>",
+      "d": "<pre><code>String query = '%' + name + '%';\nList<Account> results = [SELECT Id FROM Account WHERE Name LIKE :query];</code></pre>"
     },
     "answers": [
-      "a",
-      "c"
+      "b",
+      "d"
     ],
-    "explanation": "Correct answer(s): A, C. (A = <pre><code>String query = '%' + name + '%';\nList&lt;Account&gt; results = [SELECT Id FROM Account WHERE Name LIKE :query];</code></pre>; C = <pre><code>String query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + String.escapeSingleQuotes(name) + '%\\'';\nList&lt;Account&gt; res...) Covered under SOQL/SOSL querying (PD1)."
+    "explanation": "Correct answer(s): B, D. (Choices B and D are correct because they employ Salesforce-recommended defense patterns that neutralize malicious input by ensuring the database treats it strictly as literal data rather than executable code. Choice B secures a dynamic SOQL string by applying the String.escapeSingleQuotes() method, which adds a backslash to any user-provided quotes to prevent an attacker from \"breaking out\" of the intended string to append unauthorized commands. Choice D uses static SOQL with a bind variable (:query), which automatically escapes special characters and is considered the most secure \"best practice\" approach.) Covered under SOQL/SOSL querying (PD1)."
   },
   {
     "question": "Universal Containers has implemented an order management application. Each Order can have one or more Order Line items. The Order Line object is related to the Order via a master-detail relationship. For each Order Line item, the total price is calculated by multiplying the Order Line item price with the quantity ordered. What is the best practice to get the sum of all Order Line item totals on the Order record?",
@@ -1768,7 +1768,7 @@
     "answers": [
       "d"
     ],
-    "explanation": "Correct answer(s): D. (D = Use opportunity. sobjectTyps. getDeacribse().getRecordTypeinfos {) to get a list of record types, and iterate through them until isDefaul...) Covered under Apex triggers & bulk patterns (PD1)."
+    "explanation": "Correct answer(s): D. (Answer D is correct because it uses Schema Describe methods to programmatically identify the user's default record type.) Covered under Apex triggers & bulk patterns (PD1)."
   },
   {
     "question": "The Account object in an organization has a master-detail relationship to a child object called Branch. The following automations exist: • Roll-up summary fields • Custom validation rules • Duplicate rules developer created a trigger on the Account object. Which two things should the developer consider while testing the trigger code? Choose 2 answers",
@@ -1811,25 +1811,25 @@
     "explanation": "Correct answer(s): C. (C = 10) Covered under Apex testing (PD1)."
   },
   {
-    "question": "A developer wants to get access to the standard price book in the org while writing a test class that covers an OpportunityLineltem trigger. Which method allows access to the price book?",
+    "question": "A developer wants to get access to the standard price book in the org while writing a test class that covers an OpportunityLineItem trigger. Which method allows access to the price book?",
     "choices": {
-      "a": "Use Test getStandardPricebookid() to get the standard price book ID.",
-      "b": "Use @isTest [SeeAllData=true | and delete the existing standard price book.",
-      "c": "Use @Testvisible to allow the test method to see the standard price book.",
-      "d": "Use Test. loadData () and a static resource to load a standard price book."
+      "a": "Use @TestVisible to allow the test method to see the standard price book.",
+      "b": "Use Test.getStandardPricebookId() to get the standard price book ID.",
+      "c": "Use @IsTest(SeeAllData=True) and delete the existing standard price book",
+      "d": "Use Test.loadData( )and a static resource to load a standard price book"
     },
     "answers": [
-      "a"
+      "b"
     ],
-    "explanation": "Correct answer(s): A. (A = Use Test getStandardPricebookid() to get the standard price book ID.) Covered under Apex testing (PD1)."
+    "explanation": "Correct answer(s): B. (B = Use Test,getStandardPricebookid ( ) to get the standard price book ID.) Covered under Apex testing (PD1)."
   },
   {
-    "question": "A developer must create a lightning component that allows users to input contact record information to create a contact record, including a salary__c custom field. what should the developer use, along with a lightning-record-edit form, so that salary__c field functions as a currency input and is only viewable and editable by users that have the correct field levelpermissions on salary__C?",
+    "question": "A developer must create a lightning component that allows users to input contact record information to create a contact record, including a Salary__c custom field. What should the developer use, along with a lightning-record-edit form, so that Salary__c field functions as a currency input and is only viewable and editable by users that have the correct field level permissions on Salary__c?",
     "choices": {
-      "a": "<ligthning-input-field field-name=\"Salary__c\"> </lightning-input-field>",
-      "b": "<lightning-input-currency value=\"Salary__c\"> </lightning-input-currency>",
-      "c": "<lightning-input type=\"number\" value=\"Salary__c\" formatter=\"currency\"> </lightning-input>",
-      "d": "<lightning-formatted-number value=\"Salary__c\" format-style=\"currency\"> </lightning-formatted-number>"
+      "a": "<lightning-input-field field-name=\"Salary__c\">",
+      "b": "<lightning-formatted-number value=\"Salary__c\" format-style=\"currency\">",
+      "c": "<lightning-input type=\"number\" value=\"Salary__c\" formatter=\"currency\">",
+      "d": "<lightning-input-currency value=\"Salary__c\">"
     },
     "answers": [
       "a"
@@ -1837,7 +1837,7 @@
     "explanation": "Correct answer(s): A. (A = <ligthning-input-field field-name=\"Salary__c\"> </lightning-input-field>) Covered under security (CRUD/FLS/sharing) (PD1)."
   },
   {
-    "question": "What is the result of the following code snippet? public word doWork(Account acct) {for (Integer i = 0; i <= 2007 i++) { insert acct;}",
+    "question": "What is the result of the following code snippet?\n<pre><code>public void doWork(Account acct) {\n    for (Integer i = 0; i <= 200; i++) {\n        insert acct;\n    }\n}</code></pre>",
     "choices": {
       "a": "Accounts are inserted.",
       "b": "Account is inserted.",
@@ -1962,17 +1962,17 @@
     "explanation": "Correct answer(s): A, C. (A = Declarative development does not require Apex test classes.; C = Declarative development can be done using the Setup menu.) Covered under Platform Developer I core concepts."
   },
   {
-    "question": "How is a controller and extension specified for a custom object named \"Notice\" on a Visualforce page?",
+    "question": "How is a controller and extension specified for a custom object named \"Notice__c\" on a Visualforce page?",
     "choices": {
-      "a": "apex:page standardController=\"Notice_c\" extensions=\"myControllerExtension''\"",
-      "b": "apex:page controllers=\"Notice _c, myContcollerExtension\"",
-      "c": "apex:pege=Notice extends=\"myControllerExtension\"",
-      "d": "apex:page controller=\"Notice_c\" extensions=\"myControllerExtension\""
+      "a": "apex:page standardController=\"Notice__c\" extensions=\"myControllerExtension\"",
+      "b": "apex:page controllers=\"Notice__c, myContcollerExtension\"",
+      "c": "apex:page=\"Notice__c\" extends=\"myControllerExtension\"",
+      "d": "apex:page controller=\"Notice__c\" extensions=\"myControllerExtension\""
     },
     "answers": [
       "a"
     ],
-    "explanation": "Correct answer(s): A. (A = apex:page standardController=\"Notice_c\" extensions=\"myControllerExtension''\") Covered under Visualforce & rendering (PD1)."
+    "explanation": "Correct answer(s): A. (A = apex:page standardController=\"Notice__c\" extensions=\"myControllerExtension\") Covered under Visualforce & rendering (PD1)."
   },
   {
     "question": "Universal Containers wants a list button to display a Visualforce page that allows users to edit multiple recoras. Which Visualforce feature supports this requirement?",
@@ -2003,15 +2003,15 @@
   {
     "question": "Which code statement includes an Apex method named update Accounts in the class AccountController for use in a Lightning web component?",
     "choices": {
-      "a": "import updateAccounts from \"AccountControlles';",
-      "b": "import updateAccounts from \"Salesforce/apex/AccountController:';",
-      "c": "import updateAccounts from \"Account@ontroller.updateAccounts';",
-      "d": "import updateAccounts from \"@salesforce/apex/AccountController.updateAccounts\";"
+      "a": "import updateAccounts from 'AccountController';",
+      "b": "import updateAccounts from '@salesforce/apex/AccountController.updateAccounts'",
+      "c": "import updateAccounts from 'AccountController.updateAccounts';",
+      "d": "import updateAccounts from '@salesforce/apex/AccountController';"
     },
     "answers": [
       "b"
     ],
-    "explanation": "Correct answer(s): B. (B = import updateAccounts from \"Salesforce/apex/AccountController:';) Covered under LWC/Aura UI (PD1)."
+    "explanation": "Correct answer(s): B. (B = import updateAccounts from '@salesforce/apex/AccountController.updateAccounts';) Covered under LWC/Aura UI (PD1)."
   },
   {
     "question": "For which three items can a trace flag be configured? Choose 3 answers",
@@ -2085,10 +2085,10 @@
     "explanation": "Correct answer(s): A. (A = Set \"Use the first value in the list as the default value\" to True.) Covered under data model & relationships (PD1)."
   },
   {
-    "question": "A developer is tasked to perform a security review of the ContactSearch Apex class that exists in the system. Within the class, the developer identifies the following method as a security threat: ist<Contact> performSearch (String lastName) [ return Database.query('SELECT Id, FirstName, LastName FROM Contact WHERE LastName Like s'+lastName+'s'\")?; What are two ways the developer can update the method to prevent a SOQL injection attack? Choose 2 answers",
+    "question": "A developer is tasked to perform a security review of the ContactSearch Apex class that exists in the system. Whithin the class, the developer identifies the following method as a security threat:\n<pre><code>List<Contact> performSearch(String lastName){\n    return Database.query('Select Id, FirstName, LastName FROM Contact WHERE LastName Like %'+lastName+'%);\n}</code></pre>\nWhat are two ways the developer can update the method to prevent a SOQL injection attack? Choose 2 answers",
     "choices": {
       "a": "Use variable binding and replace the dynamic query with a static SOQL.",
-      "b": "Use the sacapeSingleQuotes method to sanitize the parameter before its use.",
+      "b": "Use the escapeSingleQuotes method to sanitize the parameter before its use.",
       "c": "Use the Readonly annotation and the with sharing keyword on the class.",
       "d": "Use a regular expression on the parameter to remove special characters."
     },
@@ -2127,17 +2127,17 @@
     "explanation": "Correct answer(s): A, C. (A = Formulas are calculated at runtime and are not stored in the database.; C = Formulas can reference values in related objects.) Covered under Platform Developer I core concepts."
   },
   {
-    "question": "What is the result of the following code?",
+    "question": "What is the result of the following code?\n<pre><code>Account a new Account ();\nDatabase.insert(a, false);</code></pre>",
     "choices": {
-      "a": "The record will not be created and an exception will be thrown.",
-      "b": "The record will not be created and no error will be reported.",
-      "c": "The record will be created and no error will be reported.",
-      "d": "The record will be created and a message will be in the debug log."
+      "a": "The record will be created and a message will be in the debug log.",
+      "b": "The record will be created and no error will be reported.",
+      "c": "The record will not be created and a exception will be thrown.",
+      "d": "The record will not be created and no error will be reported."
     },
     "answers": [
-      "b"
+      "d"
     ],
-    "explanation": "Correct answer(s): B. (B = The record will not be created and no error will be reported.) Covered under Platform Developer I core concepts."
+    "explanation": "Correct answer(s): D. (D = The record will not be created and no error will be reported.) Covered under Platform Developer I core concepts."
   },
   {
     "question": "A developer has a single custom controller class that works with a Visualforce Wizard to support creating and editing multiple sObjects. The wizard scepts data from user inputs across multiple Visualforce pages and from a parameter on the initial URL. Which three statements are useful inside the unit test to effectively test the custom controller? Choose 3 answers",
@@ -2263,15 +2263,15 @@
   {
     "question": "A custom Visualforce controller calls the ApexPages.addMessage() method, but no messages are rendering on the page. Which component should be added to the Visualforce page to display the message?",
     "choices": {
-      "a": "<apex:message for\"info\" />",
-      "b": "<apex:pageMessages />",
-      "c": "<apex:pageMessage severity=\"info\" />",
-      "d": "<apex:facet name=\"messages\" />"
+      "a": "<code>&lt;apex:message for\"info\" /&gt;</code>",
+      "b": "<code>&lt;apex:pageMessages /&gt;</code>",
+      "c": "<code>&lt;apex:pageMessage severity=\"info\" /&gt;</code>",
+      "d": "<code>&lt;apex:facet name=\"messages\" /&gt;</code>"
     },
     "answers": [
       "b"
     ],
-    "explanation": "Correct answer(s): B. (B = <apex:pageMessages />) Covered under LWC/Aura UI (PD1)."
+    "explanation": "Correct answer(s): B. (B = <code>&lt;apex:pageMessages /&gt;</code>) Covered under LWC/Aura UI (PD1)."
   },
   {
     "question": "Since Aura application events follow the traditional publish-subscribe model, which method is used to fire an event?",
@@ -2517,18 +2517,18 @@
   {
     "question": "Which three code lines are required to create a Lightning component on a Visualforce page? Choose 3 answers",
     "choices": {
-      "a": "<apex includeLightning/>",
-      "b": "$LightningcreateComponent",
-      "c": "$Lightning,use",
-      "d": "<apexsIds/>",
-      "e": "#Lightning,useComponent"
+      "a": "$Lightning.useComponent",
+      "b": "$Lightning.use",
+      "c": "$Lightning.createComponent",
+      "d": "<code>&lt;apex:slds/&gt;</code>",
+      "e": "<code>&lt;apex:includeLightning/&gt;</code>"
     },
     "answers": [
-      "a",
       "b",
-      "c"
+      "c",
+      "e"
     ],
-    "explanation": "Correct answer(s): A, B, C. (A = <apex includeLightning/>; B = $LightningcreateComponent; C = $Lightning,use) Covered under LWC/Aura UI (PD1)."
+    "explanation": "Correct answer(s): B, C, E. (B = $Lightning.use; C = $Lightning.createComponent; E = <code>&lt;apex:includeLightning/&gt;</code>) Covered under LWC/Aura UI (PD1)."
   },
   {
     "question": "Universal Containers (UC) is developing a process for their sales teams that requires all sales reps to go through a set of scripted steps with each new customer they create. In the first step of collecting information, UC's ERP system must be checked via a REST endpoint to see if the customer exists. If the customer exists, the data must be presented to the sales rep in Salesforce. Which two should a developer implement to satisfy the requirements? Choose 2 answers",

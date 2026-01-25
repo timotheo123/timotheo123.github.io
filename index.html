@@ -89,6 +89,17 @@
     /* Quiz */
     .topbar{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap}
     .progress{height:8px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;border:1px solid var(--border);min-width:220px}
+    #progressBar{
+      height: 100%;
+      width: 0%;
+      display: block;
+      background: rgba(80,120,255,.9);
+      border-radius: 999px;
+      transition: width .25s ease;
+    }
+    @media (max-width: 520px){
+      .progress{ min-width: 120px; }
+    }
     .progress>div{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),rgba(110,168,254,.55));transition:width 220ms ease}
     .question{font-size:16px;margin:8px 0 14px;line-height:1.4}
     .choices{display:grid;gap:10px;margin:12px 0 6px}
@@ -660,8 +671,66 @@ max-height:180px;}
     }
     @media (max-width: 420px){
       body{padding:10px;}
-      .resultActions button{flex:1 1 100%;}
-      .bigScore{font-size:20px;}
+      .resultActions button{ flex: 1 1 100%; width: 100%; }
+      .bigScore{ font-size: 17px; }
+      .reviewChoice{ flex-direction: column; align-items: stretch; }
+      .reviewBadge{ align-self: flex-start; }
+    }
+
+    /* Ensure the review list itself can shrink */
+    #allReviewList{
+      display: grid;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    /* Each review item must be allowed to shrink */
+    .reviewItem{
+      min-width: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    /* Flex containers inside review items must also shrink */
+    .reviewTop,
+    .reviewMeta,
+    .reviewChoices,
+    .reviewChoice{
+      min-width: 0;
+    }
+
+    /* Prevent long text from forcing width expansion */
+    .reviewTitle,
+    .metaLine,
+    .reviewChoiceText,
+    .explainText,
+    .explainText *{
+      min-width: 0;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    /* Code blocks MUST scroll, never expand layout */
+    .reviewItem pre,
+    .reviewItem code{
+      max-width: 100%;
+      overflow-x: auto;
+      white-space: pre;
+      box-sizing: border-box;
+    }
+
+    /* Mobile: stack everything cleanly */
+    @media (max-width: 720px){
+      .reviewChoice{
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .reviewBadge{
+        align-self: flex-start;
+        margin-left: 0;
+      }
     }
 
   </style>
@@ -973,7 +1042,7 @@ max-height:180px;}
       if (!q) return;
 
       const questionEl = document.getElementById("questionText");
-      setMaybeHtml(questionEl, q.question);
+      setMaybeHtml(questionEl, renderTextWithNewlines(q.question));
 
       const hintEl = document.getElementById("hintText");
       hintEl.textContent = isMultiAnswer(q)
@@ -1036,6 +1105,11 @@ max-height:180px;}
 
       document.getElementById("prevBtn").disabled = currentIndex === 0;
       document.getElementById("nextBtn").disabled = currentIndex === quizQuestions.length - 1;
+
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Adds a smooth scrolling animation
+      });
 
       updateQuizHeader();
     }
@@ -1416,6 +1490,47 @@ max-height:180px;}
         closeExitConfirm();
       }
     });
+
+    function renderTextWithNewlines(htmlString){
+      if (!htmlString) return "";
+
+      const container = document.createElement("div");
+      container.innerHTML = htmlString;
+
+      function walk(node){
+        for (let child of [...node.childNodes]) {
+          // Only convert text nodes
+          if (child.nodeType === Node.TEXT_NODE) {
+            // Skip if inside <pre> or <code>
+            if (
+              child.parentElement &&
+              child.parentElement.closest("pre, code")
+            ) {
+              continue;
+            }
+
+            if (child.textContent.includes("\n")) {
+              const parts = child.textContent.split("\n");
+              const frag = document.createDocumentFragment();
+
+              parts.forEach((part, i) => {
+                frag.appendChild(document.createTextNode(part));
+                if (i < parts.length - 1) {
+                  frag.appendChild(document.createElement("br"));
+                }
+              });
+
+              child.replaceWith(frag);
+            }
+          } else if (child.nodeType === Node.ELEMENT_NODE) {
+            walk(child);
+          }
+        }
+      }
+
+      walk(container);
+      return container.innerHTML;
+    }
   </script>
 </body>
 </html>

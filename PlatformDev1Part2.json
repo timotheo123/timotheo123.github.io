@@ -53,17 +53,17 @@
     "explanation": "Correct answers: B, C. Using Test.loadData() allows a large number of test records to be created with minimal Apex code, and it requires the data to be stored in a static resource; together, these provide an efficient and scalable way to generate 200 unique Account records for bulk trigger testing without relying on existing org data."
   },
   {
-    "question": "Universal Containers has a Visualforce page that displays a table of every Container_c. being ....... Is falling with a view state limit because some of the customers rent over 10,000 containers.\nWhat should a developer change about the Visualforce page to help with the page load errors?",
+    "question": "Universal Containers has a Visualforce page that displays a table of every Container__c being rented by a given Account. Recently this page is failing with a view state limit because some of the customers rent over 10,000 containers. What should a developer change about the Visualforce page to help with the page load errors?",
     "choices": {
       "a": "Implement pagination with an OffsetController.",
-      "b": "Use JavaScript remoting with SOQL Offset.",
-      "c": "Use Lazy loading and a transient List variable.",
-      "d": "Implement pagination with a StandardSetController,"
+      "b": "Implement pagination with a StandardSetController.",
+      "c": "Use JavaScript remoting with SOQL Offset.",
+      "d": "Use lazy loading and a transient List variable."
     },
     "answers": [
-      "d"
+      "b"
     ],
-    "explanation": "Correct answer(s): D. (D = Implement pagination with a StandardSetController,) Covered under Visualforce & rendering (PD1)."
+    "explanation": "Correct answer(s): B. (B = Implement pagination with a StandardSetController.) Covered under Visualforce & rendering (PD1)."
   },
   {
     "question": "When a user edits the Postal Code on an Account, a custom Account text field named ''Timezone'' must be updated based on the values in a postalCodeToTimezone_c custom object.\nWhat should be built to implement this feature?",
@@ -289,7 +289,7 @@
     "explanation": "Correct answer(s): D. (D = [SELECT Id, (SELECT Id FROM Job_Applications_r) FROM Contact WHERE Accounts.Industry = 'Technology'];) Covered under data model & relationships (PD1)."
   },
   {
-    "question": "<p>Refer to the following code snippet for an environment that has more than 200 Accounts belonging to the <strong>Technology</strong> industry:</p>\r\n<pre><code>for (Account thisAccount : [SELECT Id, Industry FROM Account LIMIT 150]) {\n    if (thisAccount.Industry == 'Technology') {\n        thisAccount.Is_Tech_c = true;\n    }\n    update thisAccount;\n}</code></pre>\r\n<p>When the code executes, what happens as a result of the Apex transaction?",
+    "question": "<p>Refer to the following code snippet for an environment that has more than 200 Accounts belonging to the <strong>Technology</strong> industry:</p>\n\n<pre><code>for (Account thisAccount : [SELECT Id, Industry FROM Account LIMIT 150]) {\n    if (thisAccount.Industry == 'Technology') {\n        thisAccount.Is_Tech_c = true;\n    }\n    update thisAccount;\n}</code></pre>\n\n<p>When the code executes, what happens as a result of the Apex transaction?",
     "choices": {
       "a": "If executed in a synchronous context, the Apex transaction is likely to fail by exceeding the DML governor limit.",
       "b": "The Apex transaction fails with the following message: SObject row was retrieved via SOQL without querying the requested field: Account.Is_Tech__c.",
@@ -341,7 +341,7 @@
     "explanation": "Correct answer: A. To create a new Contact record in the flow, the developer must add a Create Records element; this allows the flow to create the Contact and then store the newly created Contact’s ID so it can be referenced and saved on the Opportunity, which cannot be done using Update or Get Records alone."
   },
   {
-    "question": "<p>The following code snippet is executed by a lightning web component in an environment with more than 2,000 lead records:</p>\r\n<pre><code>@AuraEnabled\npublic static void updateLeads(){\n    for(Lead thisLead : [SELECT Origin__c FROM Lead]){\n        thisLead.LeadSource = thisLead.Origin__c;\n        update thisLead;\n    }\n}</code></pre>\r\n<p>Which governor limit will likely be exceeded within the Apex transaction?</p>",
+    "question": "<p>The following code snippet is executed by a lightning web component in an environment with more than 2,000 lead records:</p>\n\n<pre><code>@AuraEnabled\npublic static void updateLeads(){\n    for(Lead thisLead : [SELECT Origin__c FROM Lead]){\n        thisLead.LeadSource = thisLead.Origin__c;\n        update thisLead;\n    }\n}</code></pre>\n\n<p>Which governor limit will likely be exceeded within the Apex transaction?</p>",
     "choices": {
       "a": "Total number of DML statement issued",
       "b": "Total number of records processed as a result of DML statements",
@@ -448,7 +448,7 @@
     "explanation": "Correct answer(s): B. While @AuraEnabled(cacheable=true) is used for performance optimization in read-only operations, methods that perform DML operations (like updating a list of Contacts) cannot be marked as cacheable Salesforce Documentation"
   },
   {
-    "question": "Which Lightning code segment should be written to declare dependencies on a Lightning component, c:accountList, that is used in a Visualforce page? A B C D",
+    "question": "Which Lightning code segment should be written to declare dependencies on a Lightning component, c:accountList, that is used in a Visualforce page?",
     "choices": {
       "a": "<pre><code>&lt;aura:application access=&quot;GLOBAL&quot; extends=&quot;ltng:outApp&quot;&gt;\n    &lt;aura:dependency resource=&quot;c:accountList&quot;/&gt;\n&lt;/aura:application&gt;</code></pre>",
       "b": "<pre><code>&lt;aura:component access=&quot;GLOBAL&quot;&gt;\n    &lt;aura:dependency resource=&quot;c:accountList&quot;/&gt;\n&lt;/aura:component&gt;</code></pre>",
@@ -458,7 +458,7 @@
     "answers": [
       "a"
     ],
-    "explanation": "Correct answer(s): A. (A = <pre><code>&lt;aura:application access=&quot;GLOBAL&quot; extends=&quot;ltng:outApp&quot;&gt;\n    &lt;aura:dependency resource=&quot;c:ac...) Covered under LWC/Aura UI (PD1)."
+    "explanation": "Correct answer(s): A. (A = <pre><code>&lt;aura:application access=&quot;GLOBAL&quot; extends=&quot;ltng:outApp&quot;&gt;\n    &lt;aura:dependency resource=&quot;c:accountList&quot;/&gt;\n&lt;/aura:application&gt;</code></pre>) Covered under LWC/Aura UI (PD1)."
   },
   {
     "question": "Cloud kicks has a multi-screen flow that its call center agents use when handling inbound service desk calls.\nAt one of the steps in the flow, the agents should be presented with a list of order numbers and dates that are retrieved from an external order management system in real time and displayed on the screen.\nWhat should a developer use to satisfy this requirement?",
@@ -540,11 +540,11 @@
     "explanation": "Correct answer(s): B, C. (B = Handle low-level events in the event handler and re-fire them as higher-level events.; C = Reuse the event logic in a component bundle, by putting the logic in the helper.) Covered under SOQL/SOSL querying (PD1)."
   },
   {
-    "question": "What is the result of the following code?",
+    "question": "What is the result of the following code?\n<pre><code>Account a new Account ();\nDatabase.insert(a, false);</code></pre>",
     "choices": {
-      "a": "The record will not be created and a exception will be thrown.",
+      "a": "The record will be created and a message will be in the debug log.",
       "b": "The record will be created and no error will be reported.",
-      "c": "The record will be created and a message will be in the debug log.",
+      "c": "The record will not be created and a exception will be thrown.",
       "d": "The record will not be created and no error will be reported."
     },
     "answers": [
@@ -553,7 +553,7 @@
     "explanation": "Correct answer(s): D. (D = The record will not be created and no error will be reported.) Covered under Platform Developer I core concepts."
   },
   {
-    "question": "<p>Refer to the following Apex code:</p>\r\n<pre><code>Integer x = 0;\n\ndo{\n    x = 1;\n    x++;\n} while(x &lt; 0);\n\nSystem.debug(x);</code></pre>\r\n<p>What is the value of <strong>x</strong> when it is written to the debug log?</p>",
+    "question": "<p>Refer to the following Apex code:</p>\n\n<pre><code>Integer x = 0;\n\ndo{\n    x = 1;\n    x++;\n} while(x &lt; 0);\n\nSystem.debug(x);</code></pre>\n\n<p>What is the value of <strong>x</strong> when it is written to the debug log?</p>",
     "choices": {
       "a": "2",
       "b": "1",
@@ -571,7 +571,7 @@
       "a": "An apex REST class",
       "b": "An outbound message",
       "c": "An Apex Controller",
-      "d": "An invocae method"
+      "d": "An invocable method"
     },
     "answers": [
       "a"
@@ -646,18 +646,18 @@
     "explanation": "Correct answer(s): C, D. (C = View the apex flex Queue; D = Query the AsyncApexJobe object) Covered under SOQL/SOSL querying (PD1)."
   },
   {
-    "question": "A developer is tasked to perform a security review of the ContactSearch Apex class that exists in the system.\nWhithin the class, the developer identifies the following method as a security threat: List<Contact> performSearch(String lastName){ return Database.query('Select Id, FirstName, LastName FROM Contact WHERE LastName Like %'+lastName+'%); } What are two ways the developer can update the method to prevent a SOQL injection attack? Choose 2 answers Please select 2 options.",
+    "question": "A developer is tasked to perform a security review of the ContactSearch Apex class that exists in the system. Whithin the class, the developer identifies the following method as a security threat:\n<pre><code>List<Contact> performSearch(String lastName){\n    return Database.query('Select Id, FirstName, LastName FROM Contact WHERE LastName Like %'+lastName+'%);\n}</code></pre>\nWhat are two ways the developer can update the method to prevent a SOQL injection attack? Choose 2 answers",
     "choices": {
-      "a": "Use the escapeSingleQuote method to sanitize the parameter before its use.",
-      "b": "Use variable binding and replace the dynamic query with a static SOQL.",
-      "c": "Use the @Readonly annotation and the with sharing keyword on the class.",
+      "a": "Use variable binding and replace the dynamic query with a static SOQL.",
+      "b": "Use the escapeSingleQuotes method to sanitize the parameter before its use.",
+      "c": "Use the Readonly annotation and the with sharing keyword on the class.",
       "d": "Use a regular expression on the parameter to remove special characters."
     },
     "answers": [
-      "a",
-      "b"
+      "c",
+      "d"
     ],
-    "explanation": "Correct answer(s): A, B. (A = Use the escapeSingleQuote method to sanitize the parameter before its use.; B = Use variable binding and replace the dynamic query with a static SOQL.) Covered under SOQL/SOSL querying (PD1)."
+    "explanation": "Correct answer(s): C, D. (C = Use the Readonly annotation and the with sharing keyword on the class.; D = Use a regular expression on the parameter to remove special characters.) Covered under SOQL/SOSL querying (PD1)."
   },
   {
     "question": "Which two sfdx commands can be used to add testing data to a Developer sandbox? Please select 2 options.",
@@ -676,15 +676,15 @@
   {
     "question": "A developer wants to get access to the standard price book in the org while writing a test class that covers an OpportunityLineItem trigger. Which method allows access to the price book?",
     "choices": {
-      "a": "Use Test.loadData ( )and a static resource to load a standard price book",
-      "b": "Use @TestVisible to allow the test method to see the standard price book.",
-      "c": "Use Test,getStandardPricebookid ( ) to get the standard price book ID.",
-      "d": "Use @IsTest (SeeAllData=True) and delete the existing standard price book"
+      "a": "Use @TestVisible to allow the test method to see the standard price book.",
+      "b": "Use Test.getStandardPricebookId() to get the standard price book ID.",
+      "c": "Use @IsTest(SeeAllData=True) and delete the existing standard price book",
+      "d": "Use Test.loadData( )and a static resource to load a standard price book"
     },
     "answers": [
-      "c"
+      "b"
     ],
-    "explanation": "Correct answer(s): C. (C = Use Test,getStandardPricebookid ( ) to get the standard price book ID.) Covered under Apex testing (PD1)."
+    "explanation": "Correct answer(s): B. (B = Use Test,getStandardPricebookid ( ) to get the standard price book ID.) Covered under Apex testing (PD1)."
   },
   {
     "question": "What are three ways for a developer to execute tests in an org? Choose 3.",
@@ -799,7 +799,7 @@
     "explanation": "Correct answer(s): B. (B = Lightning component) Covered under LWC/Aura UI (PD1)."
   },
   {
-    "question": "<p>Consider the following Apex code snippet:</p>\r\n<pre><code>Boolean isOK;\nInteger x;\nString theString = 'Hello';\n\nif(isOK == false &amp;&amp; theString == 'Hello'){\n    x = 1;\n}\nelse if(isOK == true &amp;&amp; theString == 'Hello'){\n    x = 2;\n}\nelse if(isOK != null &amp;&amp; theString == 'Hello'){\n    x = 3;\n}\nelse{\n    x = 4;\n}</code></pre>\r\n<p>Based on this code, what is the value of <strong>x</strong>?</p>\r\n<p><strong>Answer:</strong> 3</p>\r\n<p><em>Explanation:</em> <code>isOK</code> is declared but not initialized, so its default value is <code>null</code>. The first two <code>if</code> conditions fail because <code>null == false</code> and <code>null == true</code> are both false. The third condition checks <code>isOK != null</code>, which is also false because <code>isOK</code> is <code>null</code>, so the <code>else</code> block is executed and <code>x = 4</code>. Correction: Actually, the else block executes, so the value of x is 4.</p>",
+    "question": "<p>Consider the following Apex code snippet:</p>\n\n<pre><code>Boolean isOK;\nInteger x;\nString theString = 'Hello';\n\nif(isOK == false &amp;&amp; theString == 'Hello'){\n    x = 1;\n}\nelse if(isOK == true &amp;&amp; theString == 'Hello'){\n    x = 2;\n}\nelse if(isOK != null &amp;&amp; theString == 'Hello'){\n    x = 3;\n}\nelse{\n    x = 4;\n}</code></pre>\n\n<p>Based on this code, what is the value of <strong>x</strong>?</p>\n\n<p><strong>Answer:</strong> 3</p>\n\n<p><em>Explanation:</em> <code>isOK</code> is declared but not initialized, so its default value is <code>null</code>. The first two <code>if</code> conditions fail because <code>null == false</code> and <code>null == true</code> are both false. The third condition checks <code>isOK != null</code>, which is also false because <code>isOK</code> is <code>null</code>, so the <code>else</code> block is executed and <code>x = 4</code>. Correction: Actually, the else block executes, so the value of x is 4.</p>",
     "choices": {
       "a": "2",
       "b": "1",
@@ -852,12 +852,12 @@
     "explanation": "Correct answer(s): B, C. (B = Data import wizard is a client application provided by Salesforce.; C = Developer and Developer Pro sandboxes have different storage limits.) Covered under SOQL/SOSL querying (PD1)."
   },
   {
-    "question": "A developer must create a lightning component that allows users to input contact record information to create a contact record, including a salary__c custom field. what should the developer use, along with a lightning-record-edit form, so that salary__c field functions as a currency input and is only viewable and editable by users that have the correct field levelpermissions on salary__C?",
+    "question": "A developer must create a lightning component that allows users to input contact record information to create a contact record, including a Salary__c custom field. What should the developer use, along with a lightning-record-edit form, so that Salary__c field functions as a currency input and is only viewable and editable by users that have the correct field level permissions on Salary__c?",
     "choices": {
-      "a": "<ligthning-input-field field-name=\"Salary__c\"> </lightning-input-field>",
-      "b": "<lightning-input-currency value=\"Salary__c\"> </lightning-input-currency>",
-      "c": "<lightning-input type=\"number\" value=\"Salary__c\" formatter=\"currency\"> </lightning-input>",
-      "d": "<lightning-formatted-number value=\"Salary__c\" format-style=\"currency\"> </lightning-formatted-number>"
+      "a": "<lightning-input-field field-name=\"Salary__c\">",
+      "b": "<lightning-formatted-number value=\"Salary__c\" format-style=\"currency\">",
+      "c": "<lightning-input type=\"number\" value=\"Salary__c\" formatter=\"currency\">",
+      "d": "<lightning-input-currency value=\"Salary__c\">"
     },
     "answers": [
       "a"
@@ -1121,16 +1121,16 @@
   {
     "question": "Assuming that name is a String obtained by an a Visualforce page, which two SOQL Queries performed are safe from SOQL injection? Choose 2 answers",
     "choices": {
-      "a": "<pre><code>String query = '%' + name + '%';\nList&lt;Account&gt; results = [SELECT Id FROM Account WHERE Name LIKE :query];</code></pre>",
-      "b": "<pre><code>String query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + name.replace('\\\\'','\\\\'\\\\'') + '%\\'';\\nList&lt;Account&gt; results = Database.query(query);</code></pre>",
-      "c": "<pre><code>String query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + String.escapeSingleQuotes(name) + '%\\'';\nList&lt;Account&gt; results = Database.query(query);</code></pre>",
-      "d": "<pre><code>String query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + String.escapeSingleQuotes(name) + '%\\'';\\nList&lt;Account&gt; results = Database.query(query);</code></pre>"
+      "a": "<pre><code>String query = 'SELECT Id FROM Account WHERE Name LIKE \\''%' + name.noQuotes() + '%\\'';\nList<Account> results = Database.query(query);</code></pre>",
+      "b": "<pre><code>String query = 'SELECT Id FROM Account WHERE Name LIKE \\''%' + String.escapeSingleQuotes(name) + '%\\'';\nList<Account> results = Database.query(query);</code></pre>",
+      "c": "<pre><code>String query = 'SELECT Id FROM Account WHERE Name LIKE \\''%' + name + '%\\'';\nList<Account> results = Database.query(query);</code></pre>",
+      "d": "<pre><code>String query = '%' + name + '%';\nList<Account> results = [SELECT Id FROM Account WHERE Name LIKE :query];</code></pre>"
     },
     "answers": [
-      "a",
-      "c"
+      "b",
+      "d"
     ],
-    "explanation": "Correct answer(s): A, C. (A = <pre><code>String query = '%' + name + '%';\nList&lt;Account&gt; results = [SELECT Id FROM Account WHERE Name LIKE :query];</code></pre>; C = <pre><code>String query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + String.escapeSingleQuotes(name) + '%\\'';\nList&lt;Account&gt; res...) Covered under SOQL/SOSL querying (PD1)."
+    "explanation": "Correct answer(s): B, D. (Choices B and D are correct because they employ Salesforce-recommended defense patterns that neutralize malicious input by ensuring the database treats it strictly as literal data rather than executable code. Choice B secures a dynamic SOQL string by applying the String.escapeSingleQuotes() method, which adds a backslash to any user-provided quotes to prevent an attacker from \"breaking out\" of the intended string to append unauthorized commands. Choice D uses static SOQL with a bind variable (:query), which automatically escapes special characters and is considered the most secure \"best practice\" approach.) Covered under SOQL/SOSL querying (PD1)."
   },
   {
     "question": "Refer to the following Apex code:",
@@ -1201,17 +1201,17 @@
     "question": "Which three code lines are required to create a Lightning component on a Visualforce page?\nChoose 3 answers Please select 3 options.",
     "choices": {
       "a": "$Lightning.createComponent",
-      "b": "<apex:slds/>",
+      "b": "<code>&lt;apex:slds/&gt;</code>",
       "c": "$Lightning.useComponent",
       "d": "$Lightning.use",
-      "e": "<apex:includeLightning/>"
+      "e": "<code>&lt;apex:includeLightning/&gt;</code>"
     },
     "answers": [
       "a",
       "d",
       "e"
     ],
-    "explanation": "Correct answer(s): A, D, E. (A = $Lightning.createComponent; D = $Lightning.use; E = <apex:includeLightning/>) Covered under SOQL/SOSL querying (PD1)."
+    "explanation": "Correct answer(s): A, D, E. (A = $Lightning.createComponent; D = $Lightning.use; E = <code>&lt;apex:includeLightning/&gt;</code>) Covered under SOQL/SOSL querying (PD1)."
   },
   {
     "question": "Which aspect of Apex programming is limited due to multitenancy?",
