@@ -605,7 +605,7 @@
     "explanation": "Correct answer(s): C. (C = Create a junction object between Orderltem and Order.) Covered under data model & relationships (PD1)."
   },
   {
-    "question": "A developer is debugging the following code to determinate why Accounts are not being created Account a = new Account(Name = 'A'); Database.insert(a, false); How should the code be altered to help debug the issue?",
+    "question": "A developer is debugging the following code to determinate why Accounts are not being created:\n<pre><code>Account a new Account ();\nDatabase.insert(a, false);</code></pre>\nHow should the code be altered to help debug the issue?",
     "choices": {
       "a": "Add a try/catch around the insert method",
       "b": "Collect the insert method return value a Saveresult variable",

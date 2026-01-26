@@ -3,10 +3,10 @@
     "question": "A developer wants to invoke on outbound message when a record meets a specific criteria.\nWhich three features satisfy this use case?\nChoose 3 answer",
     "choices": {
       "a": "Process builder can be used to check the record criteria and send an outbound message with Apex Code.",
-      "b": "Process builder can be used to check the record criteria and send an outbound messagewithout Apex Code.",
+      "b": "Process builder can be used to check the record criteria and send an outbound message without Apex Code.",
       "c": "Visual Workflow can be used to check the record criteria and send an outbound message without Apex Code.",
-      "d": "Approval Process has the capacity to check the record criteria and send an outbound message without Apex Code",
-      "e": "workflows can be used to check the record criteria and send an outbound message."
+      "d": "Approval Process has the capacity to check the record criteria and send an outbound message without Apex Code.",
+      "e": "Workflows can be used to check the record criteria and send an outbound message."
     },
     "answers": [
       "a",
@@ -193,7 +193,7 @@
     "explanation": "Correct answer(s): A. (A = Salesforce CLI) Covered under deployment & dev lifecycle (PD1)."
   },
   {
-    "question": "A developer is tasked to perform a security review of the ContactSearch Apex class that exists in the system. Whithin the class, the developer identifies the following method as a security threat:\n<pre><code>List<Contact> performSearch(String lastName){\n    return Database.query('Select Id, FirstName, LastName FROM Contact WHERE LastName Like %'+lastName+'%);\n}</code></pre>\nWhat are two ways the developer can update the method to prevent a SOQL injection attack? Choose 2 answers",
+    "question": "A developer is tasked to perform a security review of the ContactSearch Apex class that exists in the system. Within the class, the developer identifies the following method as a security threat:\n<pre><code>List<Contact> performSearch(String lastName){\n    return Database.query('Select Id, FirstName, LastName FROM Contact WHERE LastName Like %'+lastName+'%);\n}</code></pre>\nWhat are two ways the developer can update the method to prevent a SOQL injection attack? Choose 2 answers",
     "choices": {
       "a": "Use variable binding and replace the dynamic query with a static SOQL.",
       "b": "Use the escapeSingleQuotes method to sanitize the parameter before its use.",
@@ -201,13 +201,13 @@
       "d": "Use a regular expression on the parameter to remove special characters."
     },
     "answers": [
-      "c",
-      "d"
+      "a",
+      "b"
     ],
-    "explanation": "Correct answer(s): C, D. (C = Use the Readonly annotation and the with sharing keyword on the class.; D = Use a regular expression on the parameter to remove special characters.) Covered under SOQL/SOSL querying (PD1)."
+    "explanation": "Correct answer(s): A, B. (The correct answers are A and B, not C and D. SOQL injection occurs because user input is directly concatenated into a dynamic query. Variable binding (A) prevents injection by letting Salesforce safely handle user input, and escapeSingleQuotes (B) sanitizes the input to stop malicious SOQL from being injected. With sharing and Readonly (C) only control data access and transaction behavior, not query safety, and regex sanitization (D) is unreliable and not a Salesforce-recommended defense against SOQL injection.) Covered under SOQL/SOSL querying (PD1)."
   },
   {
-    "question": "What are three ways for 2 developer to execute tests in an org? Choose 3 answers",
+    "question": "What are three ways for a developer to execute tests in an org? Choose 3 answers",
     "choices": {
       "a": "Tooling API",
       "b": "Metadata API",
@@ -489,7 +489,7 @@
     "explanation": "Correct answer(s): C. (C = By providing device-awareness for mobile and desktops) Covered under LWC/Aura UI (PD1)."
   },
   {
-    "question": "Universal Containers recently transitioned from Classic to Lighting Experience. One of its business processes requires certain value from the opportunity object to be sent via HTTP REST callout to its external order management system based on a user-initiated action on the opportunity page. Example values are as follow Name Amount Account Which two methods should the developer implement to fulfill the business requirement? (Choose 2 answers)",
+    "question": "Universal Containers recently transitioned from Classic to Lighting Experience. One of its business processes requires certain value from the opportunity object to be sent via HTTP REST callout to its external order management system based on a user-initiated action on the opportunity page. Example values are as follow: Name, Amount, Account.\n\nWhich two methods should the developer implement to fulfill the business requirement? (Choose 2 answers)",
     "choices": {
       "a": "Create a Process Builder on the Opportunity object that executes an Apex immediate action to perform the HTTP REST callout whenever the Opportunity is updated.",
       "b": "Create a Lightning component that performs the HTTP REST callout, and use a Lightning Action to expose the component on the Opportunity detail page.",
@@ -548,9 +548,9 @@
     "question": "A developer has identified a method in an Apex class that performs resource intensive actions in memory by iterating over the result set of a SOQL statement on the account. The method also performs a DML statement to save the changes to the datadase.\n\nWhich two techniques should the developer implement as a best practice to ensure transaction control and avoid exceeding governor limits?\nChoose 2 answers",
     "choices": {
       "a": "Use partial DML statements to ensure only valid data is committed.",
-      "b": "Use the System,Limit classto monitor the current CPU governor limit consumption.",
-      "c": "Use the Database,Savepoint method to enforce database integrity.",
-      "d": "D. Use the Reedonly annotation to bypass the number of rows returned by a SOQL."
+      "b": "Use the System.Limit class to monitor the current CPU governor limit consumption.",
+      "c": "Use the Database.Savepoint method to enforce database integrity.",
+      "d": "Use the Readonly annotation to bypass the number of rows returned by a SOQL."
     },
     "answers": [
       "a",
@@ -630,7 +630,7 @@
       "a": "Load data from a remote site with a callout.",
       "b": "Execute anonymous Apex as a different user.",
       "c": "Set the created date of a record using a system method.",
-      "d": "Generate a Visualforce PDF with geccontentAsPDF ()."
+      "d": "Generate a Visualforce PDF with getcontentAsPDF()."
     },
     "answers": [
       "c"
@@ -1219,7 +1219,7 @@
     "explanation": "Correct answer(s): A, D, E. (A = Relationships; D = Flow; E = Roll-Up Summaries) Covered under Platform Developer I core concepts."
   },
   {
-    "question": "A developer is migrating a Visualforce page into a Lightning web component.\nThe Visualforce page shows information about a single record. The developer decides to use\nLightning Data Service to access record data.\nWhich security consideration should the developer be aware of?",
+    "question": "A developer is migrating a Visualforce page into a Lightning web component.\nThe Visualforce page shows information about a single record. The developer decides to use Lightning Data Service to access record data.\n\nWhich security consideration should the developer be aware of?",
     "choices": {
       "a": "Lightning Data Service handles sharing rules and field-level security.",
       "b": "Lightning Data Service ignores field-level security.",
@@ -1273,10 +1273,10 @@
   {
     "question": "A developer has identified a method in an Apex class that performs resource intensive actions in memory by iterating over the result set of a SOQL statement on the account. The method also performs a DML statement to save the changes to the datadase.\nWhich two techniques should the developer implement as a best practice to ensure transaction control and avoid exceeding governor limits?\nChoose 2 answers",
     "choices": {
-      "a": "Use the System,Limit classto monitor the current CPU governor limit consumption.",
-      "b": "Use the Database,Savepoint method to enforce database integrity.",
+      "a": "Use the System.Limit class to monitor the current CPU governor limit consumption.",
+      "b": "Use the Database.Savepoint method to enforce database integrity.",
       "c": "Use partial DML statements to ensure only valid data is committed.",
-      "d": "Use the Reedonly annotation to bypass the number of rows returned by a SOQL."
+      "d": "Use the Readonly annotation to bypass the number of rows returned by a SOQL."
     },
     "answers": [
       "a",
@@ -1298,7 +1298,7 @@
     "explanation": "Correct answer(s): D. (D = Use a validation rule.) Covered under data model & relationships (PD1)."
   },
   {
-    "question": "Universal Containers has developed custom Apex code and Lightning Components in a\nSandbox environment.\nThey need to deploy the code and associated configurations to the Production environment.\nWhat is the recommended process for deploying the code and configurations to Production?",
+    "question": "Universal Containers has developed custom Apex code and Lightning Components in a Sandbox environment.They need to deploy the code and associated configurations to the Production environment.\n\nWhat is the recommended process for deploying the code and configurations to Production?",
     "choices": {
       "a": "Use a change set to deploy the Apex code and Lightning Components.",
       "b": "Use the Force.com IDE to deploy the Apex code and Lightning Components.",
@@ -1311,7 +1311,7 @@
     "explanation": "Correct answer(s): D. (D = Use Salesforce CLI to deploy the Apex code and Lightning Components.) Covered under deployment & dev lifecycle (PD1)."
   },
   {
-    "question": "<p>A developer created this Apex trigger that calls <code>MyClass.myStaticMethod</code>:</p>\n<pre><code>trigger myTrigger on Contact (before insert) {\n    MyClass.myStaticMethod(trigger.new);\n}</code></pre>\n<p>The developer creates a test class with a test method that calls <code>MyClass.myStaticMethod</code>, resulting in 81% overall code coverage.</p>\n<p>What happens when the developer tries to deploy the trigger and two classes to production, assuming no other code exists?</p>",
+    "question": "<p>A developer created this Apex trigger that calls <code>MyClass.myStaticMethod</code>:</p><pre><code>trigger myTrigger on Contact (before insert) {\n    MyClass.myStaticMethod(trigger.new);\n}</code></pre><p>The developer creates a test class with a test method that calls <code>MyClass.myStaticMethod</code>, resulting in 81% overall code coverage.</p><p>What happens when the developer tries to deploy the trigger and two classes to production, assuming no other code exists?</p>",
     "choices": {
       "a": "The deployment fails because no assertions were made in the test method.",
       "b": "The deployment passes because both classes and the trigger were included in the deployment.",
@@ -1343,7 +1343,7 @@
       "b": "Tooling API",
       "c": "Setup Menu",
       "d": "Salesforce DX",
-      "e": "Metadata API."
+      "e": "Metadata API"
     },
     "answers": [
       "b",
@@ -1353,7 +1353,7 @@
     "explanation": "Correct answer(s): B, C, D. (B = Tooling API; C = Setup Menu; D = Salesforce DX) Covered under Apex testing (PD1)."
   },
   {
-    "question": "A developer is debugging the following code to determinate why Accounts are not being created Account a = new Account(Name = 'A'); Database.insert(a, false); How should the code be altered to help debug the issue?",
+    "question": "A developer is debugging the following code to determinate why Accounts are not being created:\n<pre><code>Account a new Account ();\nDatabase.insert(a, false);</code></pre>\nHow should the code be altered to help debug the issue?",
     "choices": {
       "a": "Add a try/catch around the insert method",
       "b": "Set the second insert method parameter to TRUE",

@@ -883,12 +883,12 @@
     "explanation": "Correct answer(s): C. (C = Create a test class and methods to cover the Apex trigger.) Covered under Apex testing (PD1)."
   },
   {
-    "question": "Consider the following code snippet: When the test class runs, the assertion fails. Which change should the developer implement in the Apex test method to ensure the test method executes successfully?",
+    "question": "Consider the following code snippet:\n<pre><code>public class with sharing AccountsController{\n    @AuraEnabled\n    public List<Accounts> getAllAccounts(){\n        return [SELECT Id, Name, Industry FROM Account];\n    }\n}</code></pre>\n\nAs part of the deployment cycle, a developer creates the following test class:<pre><code>private class with sharing AccountsController_Test{\n    @TestSetup\n    private static void makeData(){\n        User user1 = [SELECT Id FROM User WHERE Profile.Name = 'System Administrator' AND isActive = true LIMIT 1];\n        User user2 = [SELECT Id FROM User WHERE Profile.Name = 'Standard User' AND isActive = true LIMIT 1];\n\n        TestUtils.insertAccounts(10, user1.Id);\n        TestUtils.insertAccounts(20, user2.Id);\n    }\n\n    @IsTest\n    private static void getAllAccounts_StandardUser_Test(){\n\n    }\n}</code></pre>\n\nWhen the test class runs, the assertion fails.\nWhich change should the developer implement in the Apex test method to ensure the test method executes successfully?",
     "choices": {
-      "a": "Query the Administrator use into memory and enclose lines 15 and 16 within the system,runAs (use); method.",
-      "b": "Query the Standard User into memory and enclose lines 15 and 16 within the system ,runAs; method.",
-      "c": "Add @Istest% seeAlIDataTrue; to line 12 and enclose lines 15 and 16 within Test.set(Test); and test ste-ptest);.",
-      "d": "Add System, runAs (Use; to line 14 and enclose line 15 within Test, startTest); and Test ()."
+      "a": "Query the Administrator user into memory and enclose lines 14 and 15 within the System.runAs(user) method.",
+      "b": "Query the Standard User into memory and enclose lines 14 and 15 within the System.runAs(user) method.",
+      "c": "Add @IsTest(SeeAllData=True) to line 12 and enclose lines 14 and 15 within Test.startTest() and test.stopTest().",
+      "d": "Add System.runAs(user) to line 14 and enclose line 14 within Test.startTest() and Test.stopTest()."
     },
     "answers": [
       "d"
