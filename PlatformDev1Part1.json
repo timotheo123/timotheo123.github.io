@@ -34,7 +34,7 @@
       "a": "@InvocableMethod",
       "b": "@RemoteAction",
       "c": "@future",
-      "d": "@AuraEnaled"
+      "d": "@AuraEnabled"
     },
     "answers": [
       "a"
@@ -50,9 +50,9 @@
       "d": "Total number of records retrieved by SOQL queries"
     },
     "answers": [
-      "d"
+      "c"
     ],
-    "explanation": "Correct answer(s): D. (D = Total number of records retrieved by SOQL queries) Covered under SOQL/SOSL querying (PD1)."
+    "explanation": "Correct answer(s): C. (C = Total number of DML statement issued) Answer D is possible if the org has more than 50,000 Lead records, as the transaction could exceed the SOQL rows retrieved limit. However, the guaranteed limit that will be hit first is the DML statements issued limit, which is 150 in a synchronous Apex transaction.)."
   },
   {
     "question": "Which Lightning code segment should be written to declare dependencies on a Lightning component, c:accountList, that is used in a Visualforce page?",
@@ -81,20 +81,20 @@
     "explanation": "Correct answer(s): C. (C = Use the TestVisible annotation.) Covered under Apex testing (PD1)."
   },
   {
-    "question": "Which three resources in an Azure Component can contain JavaScript functions?",
+    "question": "Which three resources in an Aura Component can contain JavaScript functions?",
     "choices": {
       "a": "Renderer",
       "b": "Design",
       "c": "Controllers",
       "d": "Style",
-      "e": "helper"
+      "e": "Helper"
     },
     "answers": [
       "a",
       "c",
       "e"
     ],
-    "explanation": "Correct answer(s): A, C, E. (A = Renderer; C = Controllers; E = helper) Covered under LWC/Aura UI (PD1)."
+    "explanation": "Correct answer(s): A, C, E. (A = Renderer; C = Controllers; E = Helper) Covered under LWC/Aura UI (PD1)."
   },
   {
     "question": "Which action may cause triggers to fire?",
@@ -113,17 +113,17 @@
     "question": "A developer has a single custom controller class that works with a Visualforce Wizard to support creating and editing multiple subjects. The wizard accepts data from user inputs across multiple Visualforce pages and from a parameter on the initial URL.\nWhich three statements are useful inside the unit test to effectively test the custom controller?\nChoose 3 answers",
     "choices": {
       "a": "Test.setCurrentPage(pageRef);",
-      "b": "ApexPages.CurrentPage().getParameters().put('input\\', 'TestValue');",
-      "c": "public ExtendedController(ApexPages StandardController cntrl) { }",
-      "d": "String nextPage - controller.save().getUrl();",
-      "e": "insert pageRef."
+      "b": "ApexPages.currentPage().getParameters().put('input', 'TestValue');",
+      "c": "public ExtendedController(ApexPages.StandardController cntrl){}",
+      "d": "String nextPage = controller.save().getUrl();",
+      "e": "insert pageRef;"
     },
     "answers": [
       "a",
       "b",
       "d"
     ],
-    "explanation": "Correct answer(s): A, B, D. (A = Test.setCurrentPage(pageRef);; B = ApexPages.CurrentPage().getParameters().put('input\\', 'TestValue');; D = String nextPage - controller.save().getUrl();) Covered under Apex testing (PD1)."
+    "explanation": "Correct answer(s): A, B, D. (A = Test.setCurrentPage(pageRef);) (B = ApexPages.CurrentPage().getParameters().put('input\\', 'TestValue');) (D = String nextPage = controller.save().getUrl();) Covered under Apex testing (PD1)."
   },
   {
     "question": "Which two statements are true about using the @testSetup annotation in an Apex test class?\nChoose 2 answers",
@@ -137,12 +137,12 @@
       "b",
       "d"
     ],
-    "explanation": "Correct answer(s): B, D. (B = A method annotated with @testSetup runs once per test class; D = Due to how Apex test data isolation works, the @testSetup method is incompatible with classes or methods annotated with @isTest(SeeAllData=true)) "
+    "explanation": "Correct answer(s): B, D. (B = Due to how Apex test data isolation works, the @testSetup method is incompatible with classes or methods annotated with @isTest(SeeAllData=true);  D = A method annotated with @testSetup runs once per test class.) "
   },
   {
     "question": "What are two use cases for executing Anonymous Apex code? Choose 2 answers",
     "choices": {
-      "a": "To delete 15,000 inactive Accounts In a single transaction after a deployment",
+      "a": "To delete 15,000 inactive Accounts in a single transaction after a deployment",
       "b": "To add unit test code coverage to an org",
       "c": "To run a batch Apex class to update all Contacts",
       "d": "To schedule an Apex class to run periodically"
@@ -154,7 +154,7 @@
     "explanation": "Correct answer(s): C, D. (C = To run a batch Apex class to update all Contacts; D = To schedule an Apex class to run periodically) Covered under Platform Developer I core concepts."
   },
   {
-    "question": "Universal Containers has an order system that uses an Order Number to identify an order for\ncustomers and service agents. Order records will be imported into Salesforce.\nHow should the Order Number field be defined in Salesforce?",
+    "question": "Universal Containers has an order system that uses an Order Number to identify an order for customers and service agents. Order records will be imported into Salesforce.\nHow should the Order Number field be defined in Salesforce?",
     "choices": {
       "a": "Direct Lookup",
       "b": "External ID and Unique",
@@ -171,13 +171,13 @@
     "choices": {
       "a": "@AuraEnabled(cacheable=false) public static List<Opportunity> search(String term) { /*implementation*/ }",
       "b": "@AuraEnabled(cacheable=false) public List<Opportunity> search(String term) { /*implementation*/ }",
-      "c": "@AuraEnabled(cacheable=true) public static List search(String term) { /* implementation*/ }",
+      "c": "@AuraEnabled(cacheable=true) public static List<Opportunity> search(String term) { /* implementation*/ }",
       "d": "@AuraEnabled(cacheable=true) public List search(String term) { /*implementation*/ }"
     },
     "answers": [
       "c"
     ],
-    "explanation": "Correct answer(s): C. (C = @AuraEnabled(cacheable=true) public static List search(String term) { /* implementation*/ }) Covered under LWC/Aura UI (PD1)."
+    "explanation": "Correct answer(s): C. (C = @AuraEnabled(cacheable=true) public static List<Opportunity> search(String term) { /* implementation*/ }) Covered under LWC/Aura UI (PD1)."
   },
   {
     "question": "What should be used to create scratch orgs?",
@@ -193,7 +193,7 @@
     "explanation": "Correct answer(s): A. (A = Salesforce CLI) Covered under deployment & dev lifecycle (PD1)."
   },
   {
-    "question": "A developer is tasked to perform a security review of the ContactSearch Apex class that exists in the system. Within the class, the developer identifies the following method as a security threat:\n<pre><code>List<Contact> performSearch(String lastName){\n    return Database.query('Select Id, FirstName, LastName FROM Contact WHERE LastName Like %'+lastName+'%);\n}</code></pre>\nWhat are two ways the developer can update the method to prevent a SOQL injection attack? Choose 2 answers",
+    "question": "A developer is tasked to perform a security review of the ContactSearch Apex class that exists in the system. Within the class, the developer identifies the following method as a security threat:\n<pre><code>List<Contact> performSearch(String lastName){\n    return Database.query('Select Id, FirstName, LastName FROM Contact WHERE LastName LIKE %'+lastName+'%);\n}</code></pre>\nWhat are two ways the developer can update the method to prevent a SOQL injection attack? Choose 2 answers",
     "choices": {
       "a": "Use variable binding and replace the dynamic query with a static SOQL.",
       "b": "Use the escapeSingleQuotes method to sanitize the parameter before its use.",
@@ -223,7 +223,7 @@
     "explanation": "Correct answer(s): A, C, D. (Bulk API and Metadata API are primarily used for data operations (Bulk API) and managing metadata (Metadata API), not for the direct execution of Apex tests.)"
   },
   {
-    "question": "A developer at Universal Containers is tasked with implementing a new Salesforce application that will be maintained completely by their company's Salesforce Administrator.\nWhich two options should be considered for building out the business logic layerof the application?\nChoose 2 answer",
+    "question": "A developer at Universal Containers is tasked with implementing a new Salesforce application that will be maintained completely by their company's Salesforce Administrator.\nWhich two options should be considered for building out the business logic layer of the application?\nChoose 2 answer",
     "choices": {
       "a": "Record-Triggered Flows",
       "b": "Invocable Actions",
@@ -232,12 +232,12 @@
     },
     "answers": [
       "a",
-      "c"
+      "d"
     ],
-    "explanation": "Correct answer(s): A, C. (A = Record-Triggered Flows, B = Invocable Actions) Covered under debugging & logs (PD1)."
+    "explanation": "Correct answer(s): A, D. (A = Record-Triggered Flows, D = Validation Rules) Covered under debugging & logs (PD1)."
   },
   {
-    "question": "A software company uses the following objects and relationships:\n* Case: to handle customer support issues\n* Defect_c: a custom object to represent known issues with the company's software\n* case_Defect__c: a junction object between Case and Defector to represent that a defect Is a\ncustomer issue What should be done to share a specific Case-Defect_c record with a user?",
+    "question": "A software company uses the following objects and relationships:\n* Case: to handle customer support issues\n* Defect_c: a custom object to represent known issues with the company's software\n* Case_Defect__c: a junction object between Case and Defector to represent that a defect is a customer issue. What should be done to share a specific Case_Defect_c record with a user?",
     "choices": {
       "a": "Share the Case_Defect_c record.",
       "b": "Share the parent Case record.",
@@ -263,7 +263,7 @@
     "explanation": "Correct answer(s): B. (B = Write a class that implements the HTTPCalloutMock interface.) Covered under Apex testing (PD1)."
   },
   {
-    "question": "A company wants to implement a new call center process for handling customer service calls. It requires service reps to ask for the caller's account number before proceeding with the rest of their call script.\nFollowing best practices, what is the optimal approach to satisfy this requirmrnt?",
+    "question": "A company wants to implement a new call center process for handling customer service calls. It requires service reps to ask for the caller's account number before proceeding with the rest of their call script.\nFollowing best practices, what is the optimal approach to satisfy this requirment?",
     "choices": {
       "a": "Apex trigger",
       "b": "Flow Builder",
@@ -337,7 +337,7 @@
     "choices": {
       "a": "Metadata API",
       "b": "Bulk API",
-      "c": "Developer console",
+      "c": "Developer Console",
       "d": "Tooling API"
     },
     "answers": [
@@ -347,10 +347,10 @@
     "explanation": "Correct answer(s): C, D. (C = Developer console; D = Tooling API) Covered under Apex testing (PD1)."
   },
   {
-    "question": "What are three capabilities of the <ltng : require> tag when loading JavaScript resources in Aura components?\nChoose 3 answers",
+    "question": "What are three capabilities of the <ltng:require> tag when loading JavaScript resources in Aura components?\nChoose 3 answers",
     "choices": {
       "a": "Loading files from Documents",
-      "b": "Loading scripts In parallel",
+      "b": "Loading scripts in parallel",
       "c": "Specifying loading order",
       "d": "Loading externally hosted scripts",
       "e": "One-time loading for duplicate scripts"
@@ -372,11 +372,11 @@
       "e": "A custom exception class cannot contain member variables or methods."
     },
     "answers": [
+      "a",
       "b",
-      "c",
       "d"
     ],
-    "explanation": "Correct answer(s): B, C, D. (B = A custom exception class name must end with \"Exception\".; C = A custom exception class can extend other classes besides the Exception class.; D = A custom exception class can implement one or many interfaces.) Covered under Platform Developer I core concepts."
+    "explanation": "Correct answer(s): A, B, D. (C = Incorrect (A custom exception must extend Exception.); D = Incorrect (Custom exception classes can contain member variables, methods, constructors, and can implement interfaces.)) Covered under Platform Developer I core concepts."
   },
   {
     "question": "A development team wants to use a deployment script to automatically deploy to a sandbox during their development cycles.\nWhich two tools can they use to run a script that deploys to a sandbox?\nChoose 2 answers",
@@ -395,10 +395,10 @@
   {
     "question": "<p>Refer to the code snippet below</p><pre><code>import fetchOpps from '@salesforce/apex/OpportunitySearch.fetchOpportunities';\n@wire(fetchOpps)\nopportunities;</code></pre><p>When a Lightning Web Component is rendered, a list of opportunities that match certain criteria should be retrieved from the database and displayed to the end user.</p><p>fetchOpportunities;</p><p>Choose 3 answers</p>",
     "choices": {
-      "a": "The method must be annotated with the @AuraEnabled annotation",
-      "b": "The method must specify the (continuation-true) attribute",
-      "c": "The method must specify the (cacheable-true) attribute",
-      "d": "The method must be annotaled with true @InvocableMethod annotation",
+      "a": "The method must be annotated with the @AuraEnabled annotation.",
+      "b": "The method must specify the (continuation-true) attribute.",
+      "c": "The method must specify the (cacheable-true) attribute.",
+      "d": "The method must be annotated with the @InvocableMethod annotation.",
       "e": "The method cannot mutate the result set retrieved from the database."
     },
     "answers": [
@@ -412,7 +412,7 @@
     "question": "A developer has a Visualforce page and custom controller to save Account records. The developer wants to display any validation rule violation to the user. How can the developer make sure that validation rule violations are displayed?",
     "choices": {
       "a": "Use a try/catch with a custom exception class.",
-      "b": "Add cuatom controller attributes to display the message.",
+      "b": "Add custom controller attributes to display the message.",
       "c": "Perform the DML using the Database.upsert() method.",
       "d": "Include <code>&lt;apex:message&gt;</code> on the Visualforce page."
     },
@@ -460,10 +460,10 @@
       "b",
       "c"
     ],
-    "explanation": "Correct answers: B, C. Using Test.loadData() allows a large number of test records to be created with minimal Apex code, and it requires the data to be stored in a static resource; together, these provide an efficient and scalable way to generate 200 unique Account records for bulk trigger testing without relying on existing org data."
+    "explanation": "Correct answers: B, C. Using Test.loadData() allows a large number of test records to be created with minimal Apex code, and it requires the data to be stored in a static resource together. These provide an efficient and scalable way to generate 200 unique Account records for bulk trigger testing without relying on existing org data."
   },
   {
-    "question": "A developer wants to import 500 Opportunity records into a sandbox. Why should the developer choose to use data Loader instead of Data Import Wizard?",
+    "question": "A developer wants to import 500 Opportunity records into a sandbox. Why should the developer choose to use Data Loader instead of Data Import Wizard?",
     "choices": {
       "a": "Data Import Wizard cannot import all 500 records.",
       "b": "Data Loader runs from the developer's browser.",
@@ -512,24 +512,24 @@
       "e": "User"
     },
     "answers": [
-      "b",
       "c",
+      "d",
       "e"
     ],
-    "explanation": "Correct answer(s): B, C, E. (B = Visualforce; C = Apex Class; E = User) Covered under debugging & logs (PD1)."
+    "explanation": "Correct answer(s): C, D, E. (C = Apex Class; D = Apex Trigger; E = User) Covered under debugging & logs (PD1)."
   },
   {
     "question": "The Job_Application__c custom object has a field that is a Master-Detail relationship to the Contact object, where the Contact object is the Master. As part of a feature implementation, a developer needs to retrieve a list containing all Contact records where the related Account Industry is 'Technology' while also retrieving the contact's Job_Application__c records.\n\nBased on the object's relationships, what is the most efficient statement to retrieve the list of contacts?",
     "choices": {
-      "a": "[SELECT Id, (SELECT Id FROM Job_Applications_r) FROM Contact WHERE Account.Industry = 'Technology'];",
-      "b": "[SELECT Id, (SELECT Id FROM Job_Applications_r) FROM Contact WHERE Accounts.Industry = 'Technology'];",
-      "c": "[SELECT Id, (SELECT Id FROM Job_Applications_c) FROM Contact WHERE Accounts.Industry = 'Technology'];",
-      "d": "[SELECT Id, (SELECT Id FROM Job_Application_c) FROM Contact WHERE Account.Industry = 'Technology'];"
+      "a": "[SELECT Id, (SELECT Id FROM Job_Applications__r) FROM Contact WHERE Account.Industry = 'Technology'];",
+      "b": "[SELECT Id, (SELECT Id FROM Job_Applications__r) FROM Contact WHERE Accounts.Industry = 'Technology'];",
+      "c": "[SELECT Id, (SELECT Id FROM Job_Applications__c) FROM Contact WHERE Accounts.Industry = 'Technology'];",
+      "d": "[SELECT Id, (SELECT Id FROM Job_Application__c) FROM Contact WHERE Account.Industry = 'Technology'];"
     },
     "answers": [
-      "b"
+      "A"
     ],
-    "explanation": "Correct answer(s): B. (B = [SELECT Id, (SELECT Id FROM Job_Applications_r) FROM Contact WHERE Accounts.Industry = 'Technology'];) Covered under data model & relationships (PD1)."
+    "explanation": "Correct answer(s): A. (A = [SELECT Id, (SELECT Id FROM Job_Applications__r) FROM Contact WHERE Account.Industry = 'Technology'];) Covered under data model & relationships (PD1)."
   },
   {
     "question": "A developer writes a trigger on the Account object on the before update event that increments a count field. A workflow rule also increments the count field every time that an Account is created or updated. The field update in the workflow rule is configured to not re-evaluate workflow rules.\nWhat is the value of the count field if an Account is inserted with an initial value of zero, assuming no other automation logic is implemented on the Account?",
@@ -553,10 +553,10 @@
       "d": "Use the Readonly annotation to bypass the number of rows returned by a SOQL."
     },
     "answers": [
-      "a",
+      "b",
       "c"
     ],
-    "explanation": "Correct answer(s): A, C. (A = Use partial DML statements to ensure only valid data is committed.; C = Use the Database,Savepoint method to enforce database integrity.) Covered under SOQL/SOSL querying (PD1)."
+    "explanation": "Correct answer(s): B, C. (B = Use the System.Limit class to monitor the current CPU governor limit consumption.; C = Use the Database.Savepoint method to enforce database integrity.) Covered under SOQL/SOSL querying (PD1)."
   },
   {
     "question": "If apex code executes inside the execute() method of an Apex class when implementing the Batchable interface, which statement are true regarding governor limits? Choose 2 answers",
@@ -568,15 +568,15 @@
     },
     "answers": [
       "a",
-      "b"
+      "c"
     ],
-    "explanation": "Correct answer(s): A, B. (A = The apex governor limits are reset for each iteration of the execute() method.; B = The Apex governor limits are relaxed while calling the constructor of the Apex class.) Covered under governor limits (PD1)."
+    "explanation": "Correct answer(s): A, C. (A = The apex governor limits are reset for each iteration of the execute() method.; C = The Apex governor limits might be higher due to the asynchronous nature of the transaction.) Covered under governor limits (PD1)."
   },
   {
     "question": "Cloud kicks has a multi-screen flow that its call center agents use when handling inbound service desk calls.\nAt one of the steps in the flow, the agents should be presented with a list of order numbers and dates that are retrieved from an external order management system in real time and displayed on the screen.\nWhat should a developer use to satisfy this requirement?",
     "choices": {
       "a": "An Apex REST class",
-      "b": "An invocable method",
+      "b": "An Invocable method",
       "c": "An Apex controller",
       "d": "An outbound message"
     },
@@ -609,7 +609,7 @@
     "answers": [
       "a"
     ],
-    "explanation": "Correct answer: A. To create a new Contact record in the flow, the developer must add a Create Records element; this allows the flow to create the Contact and then store the newly created Contact’s ID so it can be referenced and saved on the Opportunity, which cannot be done using Update or Get Records alone."
+    "explanation": "Correct answer: A. To create a new Contact record in the flow, the developer must add a Create Records element. This allows the flow to create the Contact and then store the newly created Contact's ID so it can be referenced and saved on the Opportunity, which cannot be done using Update or Get Records alone."
   },
   {
     "question": "Universal Container(UC) wants to lower its shipping cost while making the shipping process more efficient. The Distribution Officer advises UC to implement global addresses to allow multiple Accounts to share a default pickup address. The Developer is tasked to create the supporting object and relationship for this business requirement and uses the Setup Menu to create a custom object called \"Global Address\". Which field should the developer ad to create the most efficient model that supports the business need?",
@@ -620,9 +620,9 @@
       "d": "Add a Master-Detail field on the Global Address object to the Account object."
     },
     "answers": [
-      "d"
+      "a"
     ],
-    "explanation": "Correct answer(s): D. (D = Add a Master-Detail field on the Global Address object to the Account object.) Covered under data model & relationships (PD1)."
+    "explanation": "Correct answer(s): A. (A = Add a Lookup field on the Account object to the Global Address object.) Covered under data model & relationships (PD1)."
   },
   {
     "question": "Which scenario is valid for execution by unit tests?",
@@ -1168,7 +1168,7 @@
     "choices": {
       "a": "Use the Schema.userInfo.Opportunity.getDefaultRecordType() method.",
       "b": "Query the Profile where the ID equals userInfo.getProfileID() and then use the profile.Opportunity.getDefaultRecordType() method.",
-      "c": "Create the opportunity and check the opportunity.recordType, which will have the record ID of the current user’s default record type, before inserting.",
+      "c": "Create the opportunity and check the opportunity.recordType, which will have the record ID of the current user's default record type, before inserting.",
       "d": "Use Opportunity.SObjectType.getDescribe().getRecordTypeInfos() to get a list of record types, and iterate through them until isDefaultRecordTypeMapping() is true."
     },
     "answers": [
