@@ -527,7 +527,7 @@
       "d": "[SELECT Id, (SELECT Id FROM Job_Application__c) FROM Contact WHERE Account.Industry = 'Technology'];"
     },
     "answers": [
-      "A"
+      "a"
     ],
     "explanation": "Correct answer(s): A. (A = [SELECT Id, (SELECT Id FROM Job_Applications__r) FROM Contact WHERE Account.Industry = 'Technology'];) Covered under data model & relationships (PD1)."
   },
@@ -635,6 +635,7 @@
     "answers": [
       "c"
     ],
+    "_comment": "Continue reviewing here...",
     "explanation": "Correct answer(s): C. A valid scenario for execution by unit tests, particularly in a Salesforce development context, is setting the created date of a record using a system method (e.g., Test.setCreatedDate()). This allows testing logic dependent on record age without requiring actual passage of time, while ensuring tests are isolated and do not rely on external systems."
   },
   {
@@ -701,10 +702,10 @@
       "d": "Before record-triggered flow"
     },
     "answers": [
-      "a",
-      "c"
+      "c",
+      "d"
     ],
-    "explanation": "Correct answer(s): A, C. (A = Validation rule; C = Apex trigger) Covered under data model & relationships (PD1)."
+    "explanation": "Correct answer(s): C, D. (A = Apex trigger; D = Before record-triggered flow) Covered under data model & relationships (PD1)."
   },
   {
     "question": "Which three Salesforce resources can be accessed from a Lightning web component?",
@@ -723,7 +724,7 @@
     "explanation": "Correct answer(s): A, C, D. (A = SVG resources; C = Content asset files; D = Static resources) Covered under LWC/Aura UI (PD1)."
   },
   {
-    "question": "A developer created a new trigger that inserts a Task when a new Lead is created. After\ndeploying to production, an outside integration chat reads task records is periodically reporting\nerrors.\nWhich change should the developer make to ensure the integration is not affected with minimal\nimpact to business logic?",
+    "question": "A developer created a new trigger that inserts a Task when a new Lead is created. After deploying to production, an outside integration chat reads task records is periodically reporting errors.\nWhich change should the developer make to ensure the integration is not affected with minimal impact to business logic?",
     "choices": {
       "a": "Deactivate the trigger before the integration runs.",
       "b": "Use a try-catch block after the insert statement.",
@@ -771,9 +772,9 @@
       "d": "Custom controller"
     },
     "answers": [
-      "a"
+      "c"
     ],
-    "explanation": "Correct answer(s): A. (A = Standard controller) Covered under LWC/Aura UI (PD1)."
+    "explanation": "Correct answer(s): C. (A = Standard list controller) Covered under LWC/Aura UI (PD1)."
   },
   {
     "question": "What should a developer do to check the code coverage of a class after running all tests?",
@@ -807,13 +808,13 @@
     "choices": {
       "a": "<code>&lt;lightning-formatted-number value=\"Salary__c\" format-style=\"currency\"&gt;</code>",
       "b": "<code>&lt;lightning-input-currency value=\"Salary__c\"&gt;</code>",
-      "c": "<code>&lt;ligthning-input-field field-name=\"Salary__c\"&gt;</code>",
+      "c": "<code>&lt;lightning-input-field field-name=\"Salary__c\"&gt;</code>",
       "d": "<code>&lt;lightning-input type=\"number\" value=\"Salary__c\" formatter=\"currency\"&gt;</code>"
     },
     "answers": [
       "c"
     ],
-    "explanation": "Correct answer(s): C. (C = <ligthning-input-field field-name=\"Salary__c\">) Covered under security (CRUD/FLS/sharing) (PD1)."
+    "explanation": "Correct answer(s): C. (C = <lightning-input-field field-name=\"Salary__c\">) Covered under security (CRUD/FLS/sharing) (PD1)."
   },
   {
     "question": "How does the Lightning Component framework help developers implement solutions faster?",
@@ -1213,10 +1214,10 @@
     },
     "answers": [
       "a",
-      "d",
+      "b",
       "e"
     ],
-    "explanation": "Correct answer(s): A, D, E. (A = Relationships; D = Flow; E = Roll-Up Summaries) Covered under Platform Developer I core concepts."
+    "explanation": "Correct answer(s): A, B, E. (A = Relationships; B = Custom Objects and Fields; E = Roll-Up Summaries) Covered under Platform Developer I core concepts."
   },
   {
     "question": "A developer is migrating a Visualforce page into a Lightning web component.\nThe Visualforce page shows information about a single record. The developer decides to use Lightning Data Service to access record data.\n\nWhich security consideration should the developer be aware of?",
@@ -1249,13 +1250,13 @@
     "choices": {
       "a": "<code>&lt;lightning-formatted-number value=\"Salary__c\" format-style=\"currency\"&gt;</code>",
       "b": "<code>&lt;lightning-input-currency value=\"Salary__c\"&gt;</code>",
-      "c": "<code>&lt;ligthning-input-field field-name=\"Salary__c\"&gt;</code>",
+      "c": "<code>&lt;lightning-input-field field-name=\"Salary__c\"&gt;</code>",
       "d": "<code>&lt;lightning-input type=\"number\" value=\"Salary__c\" formatter=\"currency\"&gt;</code>"
     },
     "answers": [
       "c"
     ],
-    "explanation": "Correct answer(s): C. (C = <ligthning-input-field field-name=\"Salary__c\">) Covered under security (CRUD/FLS/sharing) (PD1)."
+    "explanation": "Correct answer(s): C. (C = <lightning-input-field field-name=\"Salary__c\">) Covered under security (CRUD/FLS/sharing) (PD1)."
   },
   {
     "question": "An org has an existing Flow that creates an Opportunity with an Update Records element. A developer update the Flow to also create a Contact and store the created Contact's ID on the Opportunity.\nWhich update should the developer make in the Flow?",
